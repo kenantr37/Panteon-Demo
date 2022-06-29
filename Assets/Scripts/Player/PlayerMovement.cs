@@ -4,19 +4,30 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float playerSpeed = 0.1f;
+    [SerializeField] float playerSpeed = 1f;
+    float startPos;
+
+    void Start()
+    {
+        float startPos = Input.mousePosition.x;
+    }
     void Update()
     {
+        MoveForward();
         SwerveMechanic();
+    }
+    void MoveForward()
+    {
+        //if you'll use Rigidbody, don't forget to look at Time.fixedDeltaTime
+        Vector3 playerForward = Vector3.forward * playerSpeed * Time.deltaTime;
+        transform.position = transform.position + playerForward;
     }
     void SwerveMechanic()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            Vector3 horizontal = Input.mousePosition;
-            horizontal = horizontal + transform.position;
-            Debug.Log(horizontal + "mouse'a basýlýyor þuanda");
-            transform.position = transform.position + new Vector3(horizontal.x * Time.deltaTime * playerSpeed, transform.position.y, transform.position.z);
+            float endPos = Input.mousePosition.x - startPos;
+            Debug.Log(startPos + " : " + endPos);
         }
     }
 }
