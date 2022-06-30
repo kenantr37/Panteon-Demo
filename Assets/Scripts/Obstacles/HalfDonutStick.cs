@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class HalfDonutStick : MonoBehaviour
 {
-    [SerializeField] float stickSpeed = 15f;
+    [SerializeField] float stickSpeed;
     Rigidbody stickRb;
 
     void Awake()
     {
-        stickRb = GetComponent<Rigidbody>();
-    }
-    void Start()
-    {
-        StartCoroutine(StickHorizontalMove());
+        stickRb = gameObject.GetComponent<Rigidbody>();
     }
 
-    IEnumerator StickHorizontalMove()
+    void FixedUpdate()
     {
-
+        DonutMovement();
+    }
+    void DonutMovement()
+    {
         if (gameObject.transform.localPosition.x >= 0.130f)
         {
-            stickRb.velocity = (stickSpeed * Time.deltaTime * Vector3.left);
+            AddForceToStick(-1);
         }
-        if (gameObject.transform.localPosition.x <= -0.1f)
+        if (gameObject.transform.localPosition.x <= -0.095f)
         {
-            stickRb.velocity = (stickSpeed * Time.deltaTime * Vector3.right);
+            AddForceToStick(1);
         }
-        yield return new WaitForSeconds(1);
+    }
+    void AddForceToStick(int direction)
+    {
+        stickRb.AddForce(direction * stickSpeed * 10 * Time.deltaTime, 0, 0);
     }
 }
