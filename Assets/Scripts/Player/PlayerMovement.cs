@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float playerSpeed = 1f;
-    float startPos;
+    [SerializeField] float playerMoveForwardSpeed = 1f;
+    [SerializeField] float swerveSpeed = 2.5f;
+    [SerializeField] Vector3 swerveFirstPosition, swerveLastPosition, distanceFirstLastPosition;
 
     void Start()
     {
@@ -14,20 +15,56 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         MoveForward();
-        SwerveMechanic();
+        SwerveMechanicMouse();
+        SwerveMechanicMobil();
     }
     void MoveForward()
     {
-        //if you'll use Rigidbody, don't forget to look at Time.fixedDeltaTime
-        Vector3 playerForward = Vector3.forward * playerSpeed * Time.deltaTime;
+        Vector3 playerForward = Vector3.forward * playerMoveForwardSpeed * Time.deltaTime;
         transform.position = transform.position + playerForward;
+        transform.rotation = Quaternion.Euler(Vector3.forward);
     }
-    void SwerveMechanic()
+    void SwerveMechanicMouse()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            float endPos = Input.mousePosition.x - startPos;
-            Debug.Log(startPos + " : " + endPos);
+            swerveFirstPosition.x = Input.mousePosition.x;
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            swerveLastPosition.x = Input.mousePosition.x;
+            distanceFirstLastPosition = swerveLastPosition - swerveFirstPosition;
+            transform.Translate(distanceFirstLastPosition.x * Time.deltaTime * swerveSpeed * Time.deltaTime
+                , 0, 0);
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            swerveFirstPosition = Vector3.zero;
+            swerveLastPosition = Vector3.zero;
+        }
+    }
+    void SwerveMechanicMobil()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                swerveFirstPosition.x = touch.position.x;
+            }
+            else if (touch.phase == TouchPhase.Moved)
+            {
+                swerveLastPosition.x = touch.position.x;
+                distanceFirstLastPosition = swerveLastPosition - swerveFirstPosition;
+                transform.Translate(distanceFirstLastPosition.x * swerveSpeed * Time.deltaTime
+                    , 0, 0);
+            }
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                swerveLastPosition = Vector3.zero;
+                swerveLastPosition = Vector3.zero;
+            }
         }
     }
 }

@@ -11,10 +11,13 @@ GameObject:
   - component: {fileID: 9029159908171112411}
   - component: {fileID: 5395838522864423038}
   - component: {fileID: 7855731054301357236}
+  - component: {fileID: 5330027976327155534}
+  - component: {fileID: 2558479815021019942}
+  - component: {fileID: 5614698303447033240}
   m_Layer: 0
   m_Name: HorizontalObstacle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_TagString: MandatoryObstacles
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -25,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8504438447007368545}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0.12758173, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -81,3 +84,49 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &5330027976327155534
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8504438447007368545}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.047330894
+  m_Height: 0.27473754
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.004994899, z: 0}
+--- !u!114 &2558479815021019942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8504438447007368545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d5277c2b2d7c3488a83de7ca77e809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalObstacleSpeed: 3
+  horizontalObstacleRange: 0.5
+  objectLocation: {x: 0, y: 0.136, z: 4.328}
+  objectMovementDirection: {x: 1, y: 0, z: 0}
+--- !u!54 &5614698303447033240
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8504438447007368545}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
