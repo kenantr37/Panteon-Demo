@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,9 +12,10 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        MoveForward();
-        SwerveMechanicMouse();
-        SwerveMechanicMobil();
+        //MoveForward();
+        //SwerveMechanicMouse();
+        //SwerveMechanicMobil();
+        PaintTheWall();
     }
     void MoveForward()
     {
@@ -65,6 +64,23 @@ public class PlayerMovement : MonoBehaviour
                 swerveLastPosition = Vector3.zero;
                 swerveLastPosition = Vector3.zero;
             }
+        }
+    }
+    void PaintTheWall()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            swerveFirstPosition = Input.mousePosition;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            swerveLastPosition.x = Input.mousePosition.x;
+            distanceFirstLastPosition = swerveLastPosition - swerveFirstPosition;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            swerveFirstPosition = Vector3.zero;
+            swerveLastPosition = Vector3.zero;
         }
     }
 }
