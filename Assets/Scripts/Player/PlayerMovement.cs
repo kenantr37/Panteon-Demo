@@ -3,18 +3,25 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Player Movement Process")]
     [SerializeField] float _playerMoveForwardSpeed = 1f;
-    [SerializeField] float _swerveSpeed = 2.5f;
+    [SerializeField] float _mouseSpeed = 2.5f;
+    [SerializeField] float _mobilScreenSpeed = 0.005f;
     [SerializeField] Vector3 swerveFirstPosition, swerveLastPosition, distanceFirstLastPosition;
 
+    [Header("Wall Process")]
     [SerializeField] Renderer wall;
+    [SerializeField] GameObject wallScaleSize;
     [SerializeField] float paintedWallRatio;
     float transparencyRation;
 
+    [Header("Finish Line Checker")]
+    [Tooltip("Is player on the finish way before the paint-wall ?")]
     [SerializeField] bool _finishLineArrived;
     public bool FinishLineArrived { get { return _finishLineArrived; } set { _finishLineArrived = value; } }
     public float PlayerMoveForwardSpeed { get { return _playerMoveForwardSpeed; } set { _playerMoveForwardSpeed = value; } }
-    public float SwerveSpee { get { return _swerveSpeed; } set { _swerveSpeed = value; } }
+    public float MouseSpeed { get { return _mouseSpeed; } set { _mouseSpeed = value; } }
+    public float MobilScreenSpeed { get { return _mobilScreenSpeed; } set { _mobilScreenSpeed = value; } }
 
     void Start()
     {
@@ -26,13 +33,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (FinishLineArrived)
         {
-            PaintTheWall();
+            PaintTheWallMouse();
+            PaintTheWallMobil();
         }
         else
         {
             MoveForward();
-            SwerveMechanicMouse();
-            SwerveMechanicMobil();
+            SwerveMechanicMouse(_mouseSpeed);
+            SwerveMechanicMobil(_mobilScreenSpeed);
         }
     }
     void MoveForward()
@@ -41,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = transform.position + playerForward;
         transform.rotation = Quaternion.Euler(Vector3.forward);
     }
-    void SwerveMechanicMouse()
+    void SwerveMechanicMouse(float mouseSpeed)
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -51,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         {
             swerveLastPosition.x = Input.mousePosition.x;
             distanceFirstLastPosition = swerveLastPosition - swerveFirstPosition;
-            transform.Translate(distanceFirstLastPosition.x * Time.deltaTime * _swerveSpeed * Time.deltaTime
+            transform.Translate(distanceFirstLastPosition.x * Time.deltaTime * mouseSpeed * Time.deltaTime
                 , 0, 0);
         }
         else if (Input.GetMouseButtonUp(0))
@@ -60,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
             swerveLastPosition = Vector3.zero;
         }
     }
-    void SwerveMechanicMobil()
+    void SwerveMechanicMobil(float mobilScreenSpeed)
     {
         if (Input.touchCount > 0)
         {
@@ -74,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 swerveLastPosition.x = touch.position.x;
                 distanceFirstLastPosition = swerveLastPosition - swerveFirstPosition;
-                transform.Translate(distanceFirstLastPosition.x * _swerveSpeed * Time.deltaTime
+                transform.Translate(distanceFirstLastPosition.x * mobilScreenSpeed * Time.deltaTime
                     , 0, 0);
             }
             else if (touch.phase == TouchPhase.Ended)
@@ -84,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    void PaintTheWall()
+    void PaintTheWallMouse()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -96,15 +104,46 @@ public class PlayerMovement : MonoBehaviour
             if (swerveLastPosition != swerveFirstPosition)
             {
                 wall.material.color = new Color(1, 0, 0, Mathf.Lerp(0f, 1f, transparencyRation));
-                transparencyRation += 0.001f;
+                transparencyRation += 0.0005f;
                 paintedWallRatio = Mathf.RoundToInt(wall.material.color.a * 100);
-                Debug.Log(transparencyRation + "<->" + wall.material.color.a);
+
+                wallScaleSize.transform.parent.localScale = new Vector3(1, Mathf.Lerp(0, 1, transparencyRation), 1);
+                Debug.Log("You've just painted %" + paintedWallRatio + " of the wall!");
             }
         }
         if (Input.GetMouseButtonUp(0))
         {
             swerveFirstPosition = Vector3.zero;
             swerveLastPosition = Vector3.zero;
+        }
+    }
+    void PaintTheWallMobil()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                swerveFirstPosition.x = touch.position.x;
+            }
+            if (touch.phase == TouchPhase.Moved)
+            {
+                if (swerveLastPosition != swerveFirstPosition)
+                {
+                    wall.material.color = new Color(1, 0, 0, Mathf.Lerp(0f, 1f, transparencyRation));
+                    transparencyRation += 0.0005f;
+                    paintedWallRatio = Mathf.RoundToInt(wall.material.color.a * 100);
+
+                    wallScaleSize.transform.parent.localScale = new Vector3(1, Mathf.Lerp(0, 1, transparencyRation), 1);
+                    Debug.Log("You've just painted %" + paintedWallRatio + " of the wall!");
+                }
+            }
+            if (touch.phase == TouchPhase.Ended)
+            {
+                swerveLastPosition = Vector3.zero;
+                swerveLastPosition = Vector3.zero;
+            }
         }
     }
 }

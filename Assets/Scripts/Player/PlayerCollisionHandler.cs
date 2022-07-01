@@ -25,7 +25,8 @@ public class PlayerCollisionHandler : MonoBehaviour
         if (collision.gameObject.tag == "Finish")
         {
             playerMovement.PlayerMoveForwardSpeed = 0;
-            playerMovement.SwerveSpee = 0;
+            playerMovement.MouseSpeed = 0;
+            playerMovement.MobilScreenSpeed = 0;
             StartCoroutine(FinishLineWait());
         }
     }
@@ -42,7 +43,7 @@ public class PlayerCollisionHandler : MonoBehaviour
     IEnumerator FinishLineWait()
     {
         Debug.Log(Mathf.RoundToInt(Time.time));
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         playerMovement.FinishLineArrived = true;
     }
 }
