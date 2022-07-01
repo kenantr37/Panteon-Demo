@@ -1,25 +1,43 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float playerMoveForwardSpeed = 1f;
-    [SerializeField] float swerveSpeed = 2.5f;
+    [SerializeField] float _playerMoveForwardSpeed = 1f;
+    [SerializeField] float _swerveSpeed = 2.5f;
     [SerializeField] Vector3 swerveFirstPosition, swerveLastPosition, distanceFirstLastPosition;
+
+    [SerializeField] Renderer wall;
+    [SerializeField] float paintedWallRatio;
+    float transparencyRation;
+
+    [SerializeField] bool _finishLineArrived;
+    public bool FinishLineArrived { get { return _finishLineArrived; } set { _finishLineArrived = value; } }
+    public float PlayerMoveForwardSpeed { get { return _playerMoveForwardSpeed; } set { _playerMoveForwardSpeed = value; } }
+    public float SwerveSpee { get { return _swerveSpeed; } set { _swerveSpeed = value; } }
 
     void Start()
     {
         float startPos = Input.mousePosition.x;
+        _finishLineArrived = false;
+        transparencyRation = 0f;
     }
     void Update()
     {
-        //MoveForward();
-        //SwerveMechanicMouse();
-        //SwerveMechanicMobil();
-        PaintTheWall();
+        if (FinishLineArrived)
+        {
+            PaintTheWall();
+        }
+        else
+        {
+            MoveForward();
+            SwerveMechanicMouse();
+            SwerveMechanicMobil();
+        }
     }
     void MoveForward()
     {
-        Vector3 playerForward = Vector3.forward * playerMoveForwardSpeed * Time.deltaTime;
+        Vector3 playerForward = Vector3.forward * _playerMoveForwardSpeed * Time.deltaTime;
         transform.position = transform.position + playerForward;
         transform.rotation = Quaternion.Euler(Vector3.forward);
     }
@@ -33,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         {
             swerveLastPosition.x = Input.mousePosition.x;
             distanceFirstLastPosition = swerveLastPosition - swerveFirstPosition;
-            transform.Translate(distanceFirstLastPosition.x * Time.deltaTime * swerveSpeed * Time.deltaTime
+            transform.Translate(distanceFirstLastPosition.x * Time.deltaTime * _swerveSpeed * Time.deltaTime
                 , 0, 0);
         }
         else if (Input.GetMouseButtonUp(0))
@@ -56,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 swerveLastPosition.x = touch.position.x;
                 distanceFirstLastPosition = swerveLastPosition - swerveFirstPosition;
-                transform.Translate(distanceFirstLastPosition.x * swerveSpeed * Time.deltaTime
+                transform.Translate(distanceFirstLastPosition.x * _swerveSpeed * Time.deltaTime
                     , 0, 0);
             }
             else if (touch.phase == TouchPhase.Ended)
@@ -74,8 +92,14 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetMouseButton(0))
         {
-            swerveLastPosition.x = Input.mousePosition.x;
-            distanceFirstLastPosition = swerveLastPosition - swerveFirstPosition;
+            swerveLastPosition = Input.mousePosition;
+            if (swerveLastPosition != swerveFirstPosition)
+            {
+                wall.material.color = new Color(1, 0, 0, Mathf.Lerp(0f, 1f, transparencyRation));
+                transparencyRation += 0.001f;
+                paintedWallRatio = Mathf.RoundToInt(wall.material.color.a * 100);
+                Debug.Log(transparencyRation + "<->" + wall.material.color.a);
+            }
         }
         if (Input.GetMouseButtonUp(0))
         {

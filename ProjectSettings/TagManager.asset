@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - RotationStick
   - Rotator
+  - Wall
   layers:
   - Default
   - TransparentFX
