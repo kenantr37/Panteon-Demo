@@ -171,11 +171,11 @@ GameObject:
   - component: {fileID: 7077648605414058057}
   m_Layer: 0
   m_Name: Boy
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2871667920922524695
 Transform:
   m_ObjectHideFlags: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c1521f159a5784eafa9aa35ba150ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMoveForwardSpeed: 0.5
+  playerMoveForwardSpeed: 0.3
   swerveSpeed: 2.5
   swerveFirstPosition: {x: 0, y: 0, z: 0}
   swerveLastPosition: {x: 0, y: 0, z: 0}

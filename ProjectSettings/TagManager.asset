@@ -7,6 +7,8 @@ TagManager:
   - MandatoryObstacles
   - RotatingPlatform
   - Ground
+  - RotationStick
+  - Rotator
   layers:
   - Default
   - TransparentFX
