@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RotatorStick : MonoBehaviour
 {
-    [SerializeField] public float rotatorRotateSpeed;
+    public float rotatorRotateSpeed;
     void Update()
     {
         RotateRotatorStick();
