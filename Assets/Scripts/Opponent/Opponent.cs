@@ -6,7 +6,7 @@ public class Opponent : MonoBehaviour
 {
     [SerializeField] float opponentMoveForwardSpeed = .5f;
     [SerializeField] List<Transform> objectsToEscape;
-    [SerializeField] float horizontalDistanceBetweenNextObject;
+    [SerializeField] float calculateHypotenuse;
 
     GameObject ground;
     Rigidbody opponentRb;
@@ -23,7 +23,7 @@ public class Opponent : MonoBehaviour
     {
         OpponentMoveForward();
         OpponentMoveLeftRight();
-        OpponentKeepStayingOnTheWay();
+        //OpponentKeepStayingOnTheWay();
 
     }
     void OpponentMoveForward()
@@ -37,18 +37,26 @@ public class Opponent : MonoBehaviour
         foreach (Transform everyObject in objectsToEscape)
         {
             float verticalDistanceBetweenNextObject = Mathf.Abs(transform.position.z - everyObject.position.z);
-            horizontalDistanceBetweenNextObject = Mathf.Abs(transform.localPosition.x - everyObject.position.x);
-            Debug.Log("yatay mesafe" + horizontalDistanceBetweenNextObject);
+            float horizontalDistanceBetweenNextObject = Mathf.Abs(transform.localPosition.x - everyObject.position.x);
+            //Debug.Log("yatay mesafe" + horizontalDistanceBetweenNextObject);
 
-            if (verticalDistanceBetweenNextObject <= .2f)
+            if (verticalDistanceBetweenNextObject <= .3f)
             {
-                if (horizontalDistanceBetweenNextObject <= 0)
+                //Debug.DrawLine(transform.position, everyObject.position, Color.green);
+                calculateHypotenuse = Mathf.Sqrt(Mathf.Pow(horizontalDistanceBetweenNextObject, 2) + Mathf.Pow(verticalDistanceBetweenNextObject, 2));
+
+                if (calculateHypotenuse <= .3f && everyObject.position.x <= transform.localPosition.x)
                 {
-                    transform.Translate(Vector3.left * Time.deltaTime * .2f);
+                    Debug.Log("saðdan geçti");
+                    transform.Translate(Vector3.right * Time.deltaTime * .5f);
+                    continue;
                 }
-                else
+                else if (calculateHypotenuse <= .3f && everyObject.position.x > transform.localPosition.x)
                 {
-                    transform.Translate(Vector3.right * Time.deltaTime * .2f);
+                    transform.Translate(Vector3.left * Time.deltaTime * .3f);
+                    continue;
+                    Debug.Log("soldan geçti");
+
                 }
             }
         }
