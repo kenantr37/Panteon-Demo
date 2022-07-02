@@ -19,7 +19,7 @@ GameObject:
   m_Layer: 0
   m_Name: RotatingPlatform_Purple
   m_TagString: RotatingPlatform
-  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
