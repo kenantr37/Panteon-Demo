@@ -5,34 +5,36 @@ using UnityEngine;
 public class Opponent : MonoBehaviour
 {
     [SerializeField] float opponentMoveForwardSpeed = .5f;
-
     [SerializeField] List<Transform> objectsToEscape;
 
-
     [SerializeField] List<Transform> wayPoints;
+    [SerializeField] int wayPointIndex = 0;
 
-    [SerializeField] bool _opponentOnTheRotatingPlatform;
-    [SerializeField] List<GameObject> denemeler;
-
+    [SerializeField] Opponent opponent;
     public float calculateHypotenuse;
-    public bool OpponentOnTheRotatingPlatform { get { return _opponentOnTheRotatingPlatform; } set { _opponentOnTheRotatingPlatform = value; } }
 
-    void Start()
-    {
-        _opponentOnTheRotatingPlatform = false;
-    }
     void Update()
     {
         OpponentMoveForward();
         OpponentMoveLeftRight();
-        OpponentTryToStayMiddle();
+        OpponentFarFromOthers();
     }
     void OpponentMoveForward()
     {
-        foreach (Transform nextWayPointTransform in wayPoints)
+        int lastWayPointIndex = wayPointIndex;
+        transform.position = Vector3.MoveTowards(transform.position, wayPoints[wayPointIndex].position, opponentMoveForwardSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(Vector3.forward);
+
+        if (Vector3.Distance(transform.position, wayPoints[wayPointIndex].position) <= 3f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, nextWayPointTransform.position, Time.deltaTime * opponentMoveForwardSpeed);
-            transform.rotation = Quaternion.Euler(Vector3.forward);
+            lastWayPointIndex = wayPointIndex;
+            wayPointIndex++;
+
+            if (wayPointIndex == wayPoints.Count)
+            {
+                wayPointIndex = lastWayPointIndex;
+                //BURAYA KARAKTERÝ DURDURACAK BÝR ÞEYLER YAZ
+            }
         }
     }
     void OpponentMoveLeftRight()
@@ -50,23 +52,21 @@ public class Opponent : MonoBehaviour
                 if (calculateHypotenuse <= .5f && everyObject.position.x <= transform.position.x)
                 {
                     Debug.DrawLine(transform.position, everyObject.position, Color.red);
-                    transform.Translate(Vector3.right * Time.deltaTime * 3);
+                    transform.Translate(Vector3.right * Time.deltaTime * 10);
                 }
                 else if (calculateHypotenuse <= .5f && everyObject.position.x > transform.position.x)
                 {
                     Debug.DrawLine(transform.position, everyObject.position, Color.red);
-                    transform.Translate(Vector3.left * Time.deltaTime * 3);
+                    transform.Translate(Vector3.left * Time.deltaTime * 10);
                 }
             }
         }
     }
-    void OpponentTryToStayMiddle()
+    void OpponentFarFromOthers()
     {
-        if (_opponentOnTheRotatingPlatform)
-        {
-            Vector3 middle = transform.position + Vector3.zero;
-            transform.Translate(middle * Time.deltaTime * 1f);
-        }
-
+        //if (Vector3.Distance(transform.position, opponent.transform.position) <= .5f)
+        //{
+        //    Debug.DrawLine(transform.position, opponent.transform.position, Color.blue);
+        //}
     }
 }
