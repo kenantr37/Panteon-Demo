@@ -165,9 +165,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3308639780131448586}
+  - component: {fileID: 2075266848912850158}
+  - component: {fileID: 2084917206058287430}
+  - component: {fileID: 6436401883118571739}
+  - component: {fileID: 8106617910138311814}
   m_Layer: 0
   m_Name: Girl
-  m_TagString: Untagged
+  m_TagString: Opponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,7 +185,7 @@ Transform:
   m_GameObject: {fileID: 2783636840316829104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.11, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.10000002, z: 0.10000002}
   m_Children:
   - {fileID: 3050088428983489587}
   - {fileID: 4033706077140936406}
@@ -189,6 +193,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &2075266848912850158
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2783636840316829104}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &2084917206058287430
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2783636840316829104}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.33680093
+  m_Height: 2.599953
+  m_Direction: 1
+  m_Center: {x: 0.00000026077032, y: 1.2439296, z: 0.00016313043}
+--- !u!114 &6436401883118571739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2783636840316829104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f7dfe31f94795c46b2cabbb2241a150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8106617910138311814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2783636840316829104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81deb10a040c3094884311d152b85d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3733466554876117226
 GameObject:
   m_ObjectHideFlags: 0

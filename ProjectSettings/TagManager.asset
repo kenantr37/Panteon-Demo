@@ -10,6 +10,7 @@ TagManager:
   - RotationStick
   - Rotator
   - Wall
+  - Opponent
   layers:
   - Default
   - TransparentFX

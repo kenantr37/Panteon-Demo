@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 5143574615526852078}
   - component: {fileID: 6474844232684378964}
   - component: {fileID: 5541603032131434579}
-  - component: {fileID: 7077648605414058057}
+  - component: {fileID: 1629345598507477169}
   m_Layer: 0
   m_Name: Boy
   m_TagString: Player
@@ -206,11 +206,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMoveForwardSpeed: 0.5
-  _swerveSpeed: 2.5
+  _mouseSpeed: 2.5
+  _mobilScreenSpeed: 0.005
   swerveFirstPosition: {x: 0, y: 0, z: 0}
   swerveLastPosition: {x: 0, y: 0, z: 0}
   distanceFirstLastPosition: {x: 0, y: 0, z: 0}
   wall: {fileID: 0}
+  wallScaleSize: {fileID: 0}
   paintedWallRatio: 0
   _finishLineArrived: 0
 --- !u!114 &6474844232684378964
@@ -241,8 +243,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &7077648605414058057
-BoxCollider:
+--- !u!136 &1629345598507477169
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -251,9 +253,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.9238735, y: 2.1991158, z: 1}
-  m_Center: {x: -0.00051289797, y: 1.1714566, z: 0}
+  m_Radius: 0.33680093
+  m_Height: 2.4977596
+  m_Direction: 1
+  m_Center: {x: 0.00000026077032, y: 1.192833, z: 0.00016313043}
 --- !u!1 &3262639526250110293
 GameObject:
   m_ObjectHideFlags: 0
