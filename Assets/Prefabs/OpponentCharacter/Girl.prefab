@@ -172,7 +172,7 @@ GameObject:
   m_Layer: 0
   m_Name: Girl
   m_TagString: Opponent
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -235,6 +235,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7dfe31f94795c46b2cabbb2241a150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  opponentMoveForwardSpeed: 0.6
+  objectsToEscape:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  calculateHypotenuse: 0.3
+  wayPoint: {fileID: 0}
 --- !u!114 &8106617910138311814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,7 +574,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7078933724876816318}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

@@ -18,7 +18,7 @@ GameObject:
   m_Layer: 0
   m_Name: RotatingPlatform_Blue
   m_TagString: RotatingPlatform
-  m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 199435656834423123}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.678, y: 0.000000007561844, z: 0.0004681199}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
