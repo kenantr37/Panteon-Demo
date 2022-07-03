@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -18,16 +19,26 @@ public class PlayerMovement : MonoBehaviour
     [Header("Finish Line Checker")]
     [Tooltip("Is player on the finish way before the paint-wall ?")]
     [SerializeField] bool _finishLineArrived;
+
+    [Header("Player Ranking")]
+    [SerializeField] int playerRank;
+    List<Opponent> opponent;
+
     public bool FinishLineArrived { get { return _finishLineArrived; } set { _finishLineArrived = value; } }
     public float PlayerMoveForwardSpeed { get { return _playerMoveForwardSpeed; } set { _playerMoveForwardSpeed = value; } }
     public float MouseSpeed { get { return _mouseSpeed; } set { _mouseSpeed = value; } }
     public float MobilScreenSpeed { get { return _mobilScreenSpeed; } set { _mobilScreenSpeed = value; } }
 
+    void Awake()
+    {
+        //opponent = FindObjectsOfType<Opponent>();
+    }
     void Start()
     {
         float startPos = Input.mousePosition.x;
         _finishLineArrived = false;
         transparencyRation = 0f;
+        playerRank = 0;
     }
     void Update()
     {
@@ -42,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
             SwerveMechanicMouse(_mouseSpeed);
             SwerveMechanicMobil(_mobilScreenSpeed);
         }
+        PlayerCurrentRank();
     }
     void MoveForward()
     {
@@ -144,6 +156,17 @@ public class PlayerMovement : MonoBehaviour
                 swerveLastPosition = Vector3.zero;
                 swerveLastPosition = Vector3.zero;
             }
+        }
+    }
+    void PlayerCurrentRank()
+    {
+        if (transform.position.z <= opponent.transform.position.z)
+        {
+            playerRank -= 1;
+        }
+        else
+        {
+            playerRank++;
         }
     }
 }

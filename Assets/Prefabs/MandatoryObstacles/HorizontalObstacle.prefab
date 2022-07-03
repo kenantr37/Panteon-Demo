@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d5277c2b2d7c3488a83de7ca77e809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalObstacleSpeed: 3
+  horizontalObstacleSpeed: 1.5
   horizontalObstacleRange: 0.5
   objectLocation: {x: 0, y: 0.516, z: 4.328}
   objectMovementDirection: {x: 2, y: 0, z: 0}

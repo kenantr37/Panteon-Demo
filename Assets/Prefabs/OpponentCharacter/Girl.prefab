@@ -242,11 +242,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   wayPoints:
   - {fileID: 0}
   - {fileID: 0}
   wayPointIndex: 0
   calculateHypotenuse: 0
+  _opponentMoveToStartChecker: 0
 --- !u!114 &8106617910138311814
 MonoBehaviour:
   m_ObjectHideFlags: 0

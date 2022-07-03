@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class Opponent : MonoBehaviour
 {
+    //Opponent movement Process
     [SerializeField] float opponentMoveForwardSpeed = .5f;
     [SerializeField] List<Transform> objectsToEscape;
 
+    //wayPoint Process
     [SerializeField] List<Transform> wayPoints;
     [SerializeField] int wayPointIndex = 0;
 
-    [SerializeField] Opponent opponent;
     public float calculateHypotenuse;
 
+    //Spaning to starting position of the opponent Process
+    [SerializeField] bool _opponentMoveToStartChecker;
+    Vector3 _opponentStartingPosition;
+    public bool OppoonentStartingPosition { get { return _opponentMoveToStartChecker; } set { _opponentMoveToStartChecker = value; } }
+
+    void Start()
+    {
+        _opponentStartingPosition = transform.position;
+    }
     void Update()
     {
         OpponentMoveForward();
         OpponentMoveLeftRight();
         OpponentFarFromOthers();
+        MoveToStart();
     }
     void OpponentMoveForward()
     {
@@ -64,9 +75,14 @@ public class Opponent : MonoBehaviour
     }
     void OpponentFarFromOthers()
     {
-        //if (Vector3.Distance(transform.position, opponent.transform.position) <= .5f)
-        //{
-        //    Debug.DrawLine(transform.position, opponent.transform.position, Color.blue);
-        //}
+        return; // make opponents far from each others
+    }
+    void MoveToStart()
+    {
+        if (_opponentMoveToStartChecker)
+        {
+            transform.position = _opponentStartingPosition;
+            _opponentMoveToStartChecker = false;
+        }
     }
 }
