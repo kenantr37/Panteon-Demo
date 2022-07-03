@@ -1570,9 +1570,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   karakterler:
   - {fileID: 2783636840690913486}
+  - {fileID: 1103665696}
   - {fileID: 356779736}
   - {fileID: 1629279411}
-  - {fileID: 1103665696}
 --- !u!1001 &1221593320
 PrefabInstance:
   m_ObjectHideFlags: 0
