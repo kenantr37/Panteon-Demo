@@ -19,6 +19,14 @@ public class Opponent : MonoBehaviour
     Vector3 _opponentStartingPosition;
     public bool OppoonentStartingPosition { get { return _opponentMoveToStartChecker; } set { _opponentMoveToStartChecker = value; } }
 
+    //Opponent Ranking System
+    PlayerMovement playerMovement;
+    [SerializeField] bool playerGecti, opponentGecti;
+    [SerializeField] int max;
+    void Awake()
+    {
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+    }
     void Start()
     {
         _opponentStartingPosition = transform.position;
@@ -27,7 +35,6 @@ public class Opponent : MonoBehaviour
     {
         OpponentMoveForward();
         OpponentMoveLeftRight();
-        OpponentFarFromOthers();
         MoveToStart();
     }
     void OpponentMoveForward()
@@ -72,10 +79,6 @@ public class Opponent : MonoBehaviour
                 }
             }
         }
-    }
-    void OpponentFarFromOthers()
-    {
-        return; // make opponents far from each others
     }
     void MoveToStart()
     {

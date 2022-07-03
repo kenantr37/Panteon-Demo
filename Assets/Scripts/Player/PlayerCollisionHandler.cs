@@ -7,11 +7,14 @@ public class PlayerCollisionHandler : MonoBehaviour
     PlayerMovement playerMovement;
     float moveToCenter = 0;
     Vector3 centerOfTheGame;
+    Opponent opponent;
 
-    void Start()
+    void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        opponent = FindObjectOfType<Opponent>();
     }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "RotatingPlatform")
@@ -46,4 +49,5 @@ public class PlayerCollisionHandler : MonoBehaviour
         yield return new WaitForSeconds(3);
         playerMovement.FinishLineArrived = true;
     }
+
 }

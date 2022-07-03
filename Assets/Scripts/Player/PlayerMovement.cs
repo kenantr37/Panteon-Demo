@@ -21,25 +21,30 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool _finishLineArrived;
 
     [Header("Player Ranking")]
-    [SerializeField] int playerRank;
-    List<Opponent> opponent;
+    [SerializeField] int _playerCurrentRank;
+    [SerializeField] int playerFirstRank;
+    Opponent[] opponents;
 
     public bool FinishLineArrived { get { return _finishLineArrived; } set { _finishLineArrived = value; } }
     public float PlayerMoveForwardSpeed { get { return _playerMoveForwardSpeed; } set { _playerMoveForwardSpeed = value; } }
     public float MouseSpeed { get { return _mouseSpeed; } set { _mouseSpeed = value; } }
     public float MobilScreenSpeed { get { return _mobilScreenSpeed; } set { _mobilScreenSpeed = value; } }
+    public int PlayerCurrentRank { get { return _playerCurrentRank; } set { _playerCurrentRank = value; } }
 
     void Awake()
     {
-        //opponent = FindObjectsOfType<Opponent>();
+        opponents = FindObjectsOfType<Opponent>();
     }
     void Start()
     {
         float startPos = Input.mousePosition.x;
         _finishLineArrived = false;
         transparencyRation = 0f;
-        playerRank = 0;
+
+        PlayerFirsRank();
+        Debug.Log("starting rank : " + playerFirstRank);
     }
+
     void Update()
     {
         if (FinishLineArrived)
@@ -53,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
             SwerveMechanicMouse(_mouseSpeed);
             SwerveMechanicMobil(_mobilScreenSpeed);
         }
-        PlayerCurrentRank();
     }
     void MoveForward()
     {
@@ -158,15 +162,18 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    void PlayerCurrentRank()
+    void PlayerFirsRank()
     {
-        if (transform.position.z <= opponent.transform.position.z)
+        playerFirstRank = 1;
+
+        foreach (Opponent opponent in opponents)
         {
-            playerRank -= 1;
+            if (transform.position.z <= opponent.transform.position.z)
+            {
+                playerFirstRank++;
+            }
         }
-        else
-        {
-            playerRank++;
-        }
+        _playerCurrentRank = playerFirstRank;
     }
+
 }
