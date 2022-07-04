@@ -1,29 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerCollisionHandler : MonoBehaviour
 {
     PlayerMovement playerMovement;
     float moveToCenter = 0;
     Vector3 centerOfTheGame;
-    Opponent opponent;
 
     void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
-        opponent = FindObjectOfType<Opponent>();
     }
-
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "RotatingPlatform")
         {
             transform.parent = collision.transform;
         }
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Holl")
         {
             transform.parent = null;
+            playerMovement.PlayerDeadChecker = true;
         }
         if (collision.gameObject.tag == "Finish")
         {
@@ -49,5 +48,4 @@ public class PlayerCollisionHandler : MonoBehaviour
         yield return new WaitForSeconds(3);
         playerMovement.FinishLineArrived = true;
     }
-
 }

@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7dfe31f94795c46b2cabbb2241a150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opponentMoveForwardSpeed: 0.2
+  opponentMoveForwardSpeed: 0.3
   objectsToEscape:
   - {fileID: 0}
   - {fileID: 0}

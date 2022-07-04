@@ -21,19 +21,24 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool _finishLineArrived;
 
     [Header("Player Ranking")]
-    [SerializeField] int _playerCurrentRank;
     [SerializeField] int playerFirstRank;
     Opponent[] opponents;
+
+    //Did player fall to holl?
+    bool _playerDeadChecker;
+    Vector3 playerFirstPosition;
 
     public bool FinishLineArrived { get { return _finishLineArrived; } set { _finishLineArrived = value; } }
     public float PlayerMoveForwardSpeed { get { return _playerMoveForwardSpeed; } set { _playerMoveForwardSpeed = value; } }
     public float MouseSpeed { get { return _mouseSpeed; } set { _mouseSpeed = value; } }
     public float MobilScreenSpeed { get { return _mobilScreenSpeed; } set { _mobilScreenSpeed = value; } }
-    public int PlayerCurrentRank { get { return _playerCurrentRank; } set { _playerCurrentRank = value; } }
+    public int PlayerCurrentRank { get { return playerFirstRank; } set { playerFirstRank = value; } }
+    public bool PlayerDeadChecker { get { return _playerDeadChecker; } set { _playerDeadChecker = value; } }
 
     void Awake()
     {
         opponents = FindObjectsOfType<Opponent>();
+        PlayerFirsRank();
     }
     void Start()
     {
@@ -41,12 +46,15 @@ public class PlayerMovement : MonoBehaviour
         _finishLineArrived = false;
         transparencyRation = 0f;
 
-        PlayerFirsRank();
         Debug.Log("starting rank : " + playerFirstRank);
+
+        playerFirstPosition = transform.position;
     }
 
     void Update()
     {
+        PLayerDead();
+
         if (FinishLineArrived)
         {
             PaintTheWallMouse();
@@ -164,8 +172,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void PlayerFirsRank()
     {
-        playerFirstRank = 1;
-
         foreach (Opponent opponent in opponents)
         {
             if (transform.position.z <= opponent.transform.position.z)
@@ -173,7 +179,13 @@ public class PlayerMovement : MonoBehaviour
                 playerFirstRank++;
             }
         }
-        _playerCurrentRank = playerFirstRank;
     }
-
+    void PLayerDead()
+    {
+        if (_playerDeadChecker)
+        {
+            transform.position = playerFirstPosition;
+            _playerDeadChecker = false;
+        }
+    }
 }
