@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalObstacleSpeed: 1.5
   horizontalObstacleRange: 0.5
-  objectLocation: {x: 0, y: 0.516, z: 4.328}
+  objectLocation: {x: 0, y: 0.516, z: 6.5}
   objectMovementDirection: {x: 2, y: 0, z: 0}
 --- !u!54 &5614698303447033240
 Rigidbody:
