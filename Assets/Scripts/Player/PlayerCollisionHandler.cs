@@ -8,6 +8,7 @@ public class PlayerCollisionHandler : MonoBehaviour
     PlayerMovement playerMovement;
     float moveToCenter = 0;
     Vector3 centerOfTheGame;
+    public bool changeCameraPosition;
 
     void Awake()
     {
@@ -30,6 +31,9 @@ public class PlayerCollisionHandler : MonoBehaviour
             playerMovement.MouseSpeed = 0;
             playerMovement.MobilScreenSpeed = 0;
             StartCoroutine(FinishLineWait());
+
+            playerMovement.PlayerRb.isKinematic = true;
+            changeCameraPosition = true;
         }
     }
     void OnCollisionStay(Collision collision)
@@ -40,6 +44,13 @@ public class PlayerCollisionHandler : MonoBehaviour
             centerOfTheGame = new Vector3(0, 0, transform.localPosition.z);
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, centerOfTheGame, moveToCenter * Time.deltaTime);
             Debug.Log(moveToCenter);
+        }
+    }
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            transform.parent = null;
         }
     }
     IEnumerator FinishLineWait()

@@ -16,5 +16,9 @@ public class OpponentCollisionHandler : MonoBehaviour
         {
             opponent.OppoonentStartingPosition = true;
         }
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            opponent.OpponentRb.isKinematic = true;
+        }
     }
 }

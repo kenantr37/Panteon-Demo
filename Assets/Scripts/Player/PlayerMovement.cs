@@ -29,15 +29,20 @@ public class PlayerMovement : MonoBehaviour
     bool _playerDeadChecker;
     Vector3 playerFirstPosition;
 
+    //Camera rb setting
+    Rigidbody _playerRb;
+
     public bool FinishLineArrived { get { return _finishLineArrived; } set { _finishLineArrived = value; } }
     public float PlayerMoveForwardSpeed { get { return _playerMoveForwardSpeed; } set { _playerMoveForwardSpeed = value; } }
     public float MouseSpeed { get { return _mouseSpeed; } set { _mouseSpeed = value; } }
     public float MobilScreenSpeed { get { return _mobilScreenSpeed; } set { _mobilScreenSpeed = value; } }
     public bool PlayerDeadChecker { get { return _playerDeadChecker; } set { _playerDeadChecker = value; } }
+    public Rigidbody PlayerRb { get { return _playerRb; } set { _playerRb = value; } }
 
     void Awake()
     {
         opponents = FindObjectsOfType<Opponent>();
+        _playerRb = GetComponent<Rigidbody>();
         PlayerFirsRank();
     }
     void Start()
@@ -129,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
             if (swerveLastPosition != swerveFirstPosition)
             {
                 wall.material.color = new Color(1, 0, 0, Mathf.Lerp(0f, 1f, transparencyRation));
-                transparencyRation += 0.0005f;
+                transparencyRation += .1f * Time.deltaTime;
                 paintedWallRatio = Mathf.RoundToInt(wall.material.color.a * 100);
 
                 wallScaleSize.transform.parent.localScale = new Vector3(1, Mathf.Lerp(0, 1, transparencyRation), 1);
@@ -202,6 +207,44 @@ public class PlayerMovement : MonoBehaviour
             else
                 count++;
         }
+        ManuelCountDisplayer(count);
+        Debug.Log(count);
+    }
+    void ManuelCountDisplayer(float count)
+    {
+        if (count == 21)
+        {
+            playerRankText.text = "Player Rank : 11";
+
+        }
+        if (count == 19)
+        {
+            playerRankText.text = "Player Rank : 10";
+
+        }
+        if (count == 17)
+        {
+            playerRankText.text = "Player Rank : 9";
+
+        }
+        if (count == 15)
+        {
+            playerRankText.text = "Player Rank : 8";
+        }
+        if (count == 13)
+        {
+            playerRankText.text = "Player Rank : 7";
+
+        }
+        if (count == 11)
+        {
+            playerRankText.text = "Player Rank : 6";
+        }
+        if (count == 9)
+        {
+            playerRankText.text = "Player Rank : 5";
+
+        }
         if (count == 7)
         {
             playerRankText.text = "Player Rank : 4";
@@ -216,6 +259,9 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRankText.text = "Player Rank : 2";
         }
-        Debug.Log(count);
+        if (count == 1)
+        {
+            playerRankText.text = "Player Rank : " + count;
+        }
     }
 }

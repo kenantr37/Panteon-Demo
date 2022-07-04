@@ -23,9 +23,15 @@ public class Opponent : MonoBehaviour
     PlayerMovement playerMovement;
     [SerializeField] bool playerGecti, opponentGecti;
     [SerializeField] int max;
+
+    //Opponent FinishLine Rb
+    Rigidbody _opponentRb;
+
+    public Rigidbody OpponentRb { get { return _opponentRb; } set { _opponentRb = value; } }
     void Awake()
     {
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        _opponentRb = GetComponent<Rigidbody>();
     }
     void Start()
     {
