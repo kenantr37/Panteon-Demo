@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Movement Process")]
@@ -21,7 +21,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool _finishLineArrived;
 
     [Header("Player Ranking")]
-    [SerializeField] int playerFirstRank;
+    [SerializeField] int _playerFirstRank;
+    [SerializeField] TextMeshProUGUI playerRankText;
     Opponent[] opponents;
 
     //Did player fall to holl?
@@ -32,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
     public float PlayerMoveForwardSpeed { get { return _playerMoveForwardSpeed; } set { _playerMoveForwardSpeed = value; } }
     public float MouseSpeed { get { return _mouseSpeed; } set { _mouseSpeed = value; } }
     public float MobilScreenSpeed { get { return _mobilScreenSpeed; } set { _mobilScreenSpeed = value; } }
-    public int PlayerCurrentRank { get { return playerFirstRank; } set { playerFirstRank = value; } }
     public bool PlayerDeadChecker { get { return _playerDeadChecker; } set { _playerDeadChecker = value; } }
 
     void Awake()
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         _finishLineArrived = false;
         transparencyRation = 0f;
 
-        Debug.Log("starting rank : " + playerFirstRank);
+        Debug.Log("starting rank : " + _playerFirstRank);
 
         playerFirstPosition = transform.position;
     }
@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
             MoveForward();
             SwerveMechanicMouse(_mouseSpeed);
             SwerveMechanicMobil(_mobilScreenSpeed);
+            PlayerRankManager();
         }
     }
     void MoveForward()
@@ -176,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (transform.position.z <= opponent.transform.position.z)
             {
-                playerFirstRank++;
+                _playerFirstRank++;
             }
         }
     }
@@ -187,5 +188,34 @@ public class PlayerMovement : MonoBehaviour
             transform.position = playerFirstPosition;
             _playerDeadChecker = false;
         }
+    }
+    void PlayerRankManager()
+    {
+        float count = opponents.Length + 1;
+
+        for (int i = 0; i < opponents.Length; i++)
+        {
+            if (transform.position.z > opponents[i].transform.position.z)
+            {
+                count--;
+            }
+            else
+                count++;
+        }
+        if (count == 7)
+        {
+            playerRankText.text = "Player Rank : 4";
+
+        }
+        if (count == 5)
+        {
+            playerRankText.text = "Player Rank : 3";
+
+        }
+        if (count == 3)
+        {
+            playerRankText.text = "Player Rank : 2";
+        }
+        Debug.Log(count);
     }
 }
