@@ -19,18 +19,13 @@ public class Opponent : MonoBehaviour
     Vector3 _opponentStartingPosition;
     public bool OppoonentStartingPosition { get { return _opponentMoveToStartChecker; } set { _opponentMoveToStartChecker = value; } }
 
-    //Opponent Ranking System
-    PlayerMovement playerMovement;
-    [SerializeField] bool playerGecti, opponentGecti;
-    [SerializeField] int max;
-
     //Opponent FinishLine Rb
     Rigidbody _opponentRb;
 
     //NAVMESH OF OPPONENT
     NavMeshAgent opponentNavMesh;
-    [SerializeField] Transform opponentNavMeshFollowposition;
     [SerializeField] bool _opponentNavMeshEnable;
+    [SerializeField] Transform opponentNavMeshFollowposition;
     [SerializeField] Transform opponentBridgeWayPoint;
 
     public Rigidbody OpponentRb { get { return _opponentRb; } set { _opponentRb = value; } }
@@ -39,24 +34,20 @@ public class Opponent : MonoBehaviour
 
     void Awake()
     {
-        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         _opponentRb = GetComponent<Rigidbody>();
         opponentNavMesh = GetComponent<NavMeshAgent>();
     }
     void Start()
     {
         _opponentStartingPosition = transform.position;
-        _opponentNavMeshEnable = true;
-    }
-    void FixedUpdate()
-    {
-        OpponentMoveLeftRight();
     }
     void Update()
     {
-        OpponentMoveForward();
         MoveToStart();
         OpponentHorizontalBorder();
+        OpponentMoveLeftRight();
+        OpponentMoveForward();
+
     }
     void OpponentMoveForward()
     {
