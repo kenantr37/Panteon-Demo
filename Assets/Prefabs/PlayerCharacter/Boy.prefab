@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c1521f159a5784eafa9aa35ba150ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMoveForwardSpeed: 1.3
+  _playerMoveForwardSpeed: 1
   _mouseSpeed: 1
   _mobilScreenSpeed: 0.005
   swerveFirstPosition: {x: 0, y: 0, z: 0}

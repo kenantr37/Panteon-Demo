@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class Opponent : MonoBehaviour
 {
     //Opponent movement Process
-    [SerializeField] float opponentMoveForwardSpeed = .5f;
+    [SerializeField] float _opponentMoveForwardSpeed;
     [SerializeField] List<Transform> objectsToEscape;
 
     //wayPoint Process
@@ -34,6 +34,7 @@ public class Opponent : MonoBehaviour
     public NavMeshAgent OpponentNavMesh { get { return _opponentNavMesh; } set { _opponentNavMesh = value; } }
     public bool OpponentFollowNavMeshEnable { get { return _opponentFollowNavMeshEnable; } set { _opponentFollowNavMeshEnable = value; } }
     public bool OpponentWayPointActive { get { return _opponentFollowWayPointActive; } set { _opponentFollowWayPointActive = value; } }
+    public float OppponentMoveForwardSpeed { get { return _opponentMoveForwardSpeed; } set { _opponentMoveForwardSpeed = value; } }
 
     void Awake()
     {
@@ -61,7 +62,8 @@ public class Opponent : MonoBehaviour
         }
         if (_opponentFollowWayPointActive)
         {
-            transform.position = Vector3.MoveTowards(transform.position, opponentBridgeWayPoint.position, opponentMoveForwardSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, opponentBridgeWayPoint.position, _opponentMoveForwardSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(Vector3.forward);
         }
     }
     void OpponentMoveLeftRight()
@@ -98,6 +100,7 @@ public class Opponent : MonoBehaviour
 
             _opponentFollowNavMeshEnable = true;
             _opponentNavMesh.enabled = true;
+            _opponentMoveForwardSpeed = 0;
         }
     }
     void OpponentHorizontalBorder()

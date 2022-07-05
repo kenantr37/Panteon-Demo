@@ -7,7 +7,6 @@ TagManager:
   - MandatoryObstacles
   - Ground
   - RotationStick
-  - Rotator
   - Wall
   - Opponent
   - Holl
@@ -17,6 +16,8 @@ TagManager:
   - FirstWayPointChecker
   - WayPoint
   - NavigatorActivator
+  - RotatorRight
+  - RotatorLeft
   layers:
   - Default
   - TransparentFX

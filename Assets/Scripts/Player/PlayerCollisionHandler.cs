@@ -45,6 +45,14 @@ public class PlayerCollisionHandler : MonoBehaviour
             playerMovement.PlayerRb.isKinematic = true;
             changeCameraPosition = true;
         }
+        if (collision.gameObject.CompareTag("RotatorRight"))
+        {
+            playerMovement.PlayerRb.AddForce(Vector3.right * 250);
+        }
+        if (collision.gameObject.CompareTag("RotatorLeft"))
+        {
+            playerMovement.PlayerRb.AddForce(Vector3.left * 250);
+        }
     }
     IEnumerator FinishLineWait()
     {

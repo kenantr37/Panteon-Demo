@@ -26,27 +26,35 @@ public class OpponentCollisionHandler : MonoBehaviour
         if (collision.gameObject.CompareTag("RotatingPlatformRight"))
         {
             transform.parent = collision.gameObject.transform;
-            opponentRb.velocity = (Vector3.right * 100f * Time.deltaTime);
+            opponentRb.velocity = (Vector3.right * 150f * Time.deltaTime);
         }
         if (collision.gameObject.CompareTag("RotatingPlatformLeft"))
         {
             transform.parent = collision.gameObject.transform;
-            opponentRb.velocity = (Vector3.left * 100f * Time.deltaTime);
+            opponentRb.velocity = (Vector3.left * 150f * Time.deltaTime);
         }
         if (collision.gameObject.CompareTag("Ground"))
         {
             transform.parent = null;
+        }
+        if (collision.gameObject.CompareTag("RotatorRight"))
+        {
+            opponentRb.AddForce(Vector3.right * 250);
+        }
+        if (collision.gameObject.CompareTag("RotatorLeft"))
+        {
+            opponentRb.AddForce(Vector3.left * 250);
         }
     }
     void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("RotatingPlatformRight"))
         {
-            opponentRb.velocity = Vector3.right * 95f * Time.deltaTime;
+            opponentRb.velocity = Vector3.right * 113f * Time.deltaTime;
         }
         if (collision.gameObject.CompareTag("RotatingPlatformLeft"))
         {
-            opponentRb.velocity = Vector3.left * 95f * Time.deltaTime;
+            opponentRb.velocity = Vector3.left * 113f * Time.deltaTime;
         }
     }
     void OnTriggerEnter(Collider other)
@@ -57,6 +65,7 @@ public class OpponentCollisionHandler : MonoBehaviour
             opponent.OpponentNavMesh.enabled = false;
 
             opponent.OpponentWayPointActive = true;
+            opponent.OppponentMoveForwardSpeed = 1.5f;
         }
         if (other.gameObject.CompareTag("NavigatorActivator"))
         {
@@ -64,7 +73,7 @@ public class OpponentCollisionHandler : MonoBehaviour
             opponent.OpponentNavMesh.enabled = true;
 
             opponent.OpponentWayPointActive = false;
-
+            opponent.OppponentMoveForwardSpeed = 0;
         }
     }
 }
