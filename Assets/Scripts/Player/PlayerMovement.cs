@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Renderer wall;
     [SerializeField] GameObject wallScaleSize;
     [SerializeField] float paintedWallRatio;
+    public TextMeshProUGUI paintedWallRatioText;
     float transparencyRation;
 
     [Header("Finish Line Checker")]
@@ -54,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("starting rank : " + _playerFirstRank);
 
         playerFirstPosition = transform.position;
+        paintedWallRatioText.gameObject.SetActive(false);
+
     }
 
     void Update()
@@ -139,6 +142,8 @@ public class PlayerMovement : MonoBehaviour
 
                 wallScaleSize.transform.parent.localScale = new Vector3(1, Mathf.Lerp(0, 1, transparencyRation), 1);
                 Debug.Log("You've just painted %" + paintedWallRatio + " of the wall!");
+
+                paintedWallRatioText.text = "YOU'VE JUST PAINTED %" + paintedWallRatio;
             }
         }
         if (Input.GetMouseButtonUp(0))

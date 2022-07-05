@@ -16,9 +16,13 @@ public class PlayerCollisionHandler : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "RotatingPlatform")
+        if (collision.gameObject.CompareTag("RotatingPlatform"))
         {
             transform.parent = collision.transform;
+        }
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            transform.parent = null;
         }
         if (collision.gameObject.tag == "Holl")
         {
@@ -46,17 +50,12 @@ public class PlayerCollisionHandler : MonoBehaviour
             Debug.Log(moveToCenter);
         }
     }
-    void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            transform.parent = null;
-        }
-    }
+
     IEnumerator FinishLineWait()
     {
         Debug.Log(Mathf.RoundToInt(Time.time));
         yield return new WaitForSeconds(3);
         playerMovement.FinishLineArrived = true;
+        playerMovement.paintedWallRatioText.gameObject.SetActive(true);
     }
 }

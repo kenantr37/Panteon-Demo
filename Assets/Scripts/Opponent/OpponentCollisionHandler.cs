@@ -12,7 +12,7 @@ public class OpponentCollisionHandler : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "MandatoryObstacles" || collision.gameObject.tag == "Holl" || collision.gameObject.tag == "RotationStick")
+        if (collision.gameObject.tag == "MandatoryObstacles" || collision.gameObject.tag == "Holl")
         {
             opponent.OppoonentStartingPosition = true;
         }

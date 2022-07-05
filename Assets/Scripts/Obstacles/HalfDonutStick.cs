@@ -8,7 +8,7 @@ public class HalfDonutStick : MonoBehaviour
     Rigidbody stickRb;
     void Awake()
     {
-        stickRb = gameObject.GetComponent<Rigidbody>();
+        stickRb = GetComponent<Rigidbody>();
     }
     void FixedUpdate()
     {
