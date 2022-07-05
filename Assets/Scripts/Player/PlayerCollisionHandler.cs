@@ -9,6 +9,7 @@ public class PlayerCollisionHandler : MonoBehaviour
     float center = 0;
     Vector3 centerOfTheGame;
     public bool changeCameraPosition;
+    [SerializeField] GameObject wall;
 
     void Awake()
     {
@@ -31,6 +32,8 @@ public class PlayerCollisionHandler : MonoBehaviour
         }
         if (collision.gameObject.tag == "Finish")
         {
+            wall.gameObject.SetActive(true);
+
             Vector3 center = new Vector3(0, transform.position.y, transform.position.z);
             transform.position = center;
 

@@ -27,11 +27,17 @@ public class Opponent : MonoBehaviour
     //Opponent FinishLine Rb
     Rigidbody _opponentRb;
 
+    //this is for distance with other opponents
+    GameObject otherOpponent;
+
+
     public Rigidbody OpponentRb { get { return _opponentRb; } set { _opponentRb = value; } }
     void Awake()
     {
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         _opponentRb = GetComponent<Rigidbody>();
+
+        otherOpponent = GameObject.FindWithTag("Opponent");
     }
     void Start()
     {
@@ -42,6 +48,7 @@ public class Opponent : MonoBehaviour
         OpponentMoveForward();
         OpponentMoveLeftRight();
         MoveToStart();
+        OpponentHorizontalBorder();
     }
     void OpponentMoveForward()
     {
@@ -57,7 +64,6 @@ public class Opponent : MonoBehaviour
             if (wayPointIndex == wayPoints.Count)
             {
                 wayPointIndex = lastWayPointIndex;
-                //BURAYA KARAKTERÝ DURDURACAK BÝR ÞEYLER YAZ
             }
         }
     }
@@ -73,15 +79,15 @@ public class Opponent : MonoBehaviour
                 Debug.DrawLine(transform.position, everyObject.position, Color.green);
                 calculateHypotenuse = Mathf.Sqrt(Mathf.Pow(horizontalDistanceBetweenNextObject, 2) + Mathf.Pow(verticalDistanceBetweenNextObject, 2));
 
-                if (calculateHypotenuse <= .5f && everyObject.position.x <= transform.position.x)
+                if (calculateHypotenuse <= 1f && everyObject.position.x <= transform.position.x)
                 {
                     Debug.DrawLine(transform.position, everyObject.position, Color.red);
-                    transform.Translate(Vector3.right * Time.deltaTime);
+                    transform.Translate(Vector3.right * Time.deltaTime * 2f);
                 }
-                else if (calculateHypotenuse <= .5f && everyObject.position.x > transform.position.x)
+                else if (calculateHypotenuse <= .7f && everyObject.position.x > transform.position.x)
                 {
                     Debug.DrawLine(transform.position, everyObject.position, Color.red);
-                    transform.Translate(Vector3.left * Time.deltaTime);
+                    transform.Translate(Vector3.left * Time.deltaTime * 2f);
                 }
             }
         }
@@ -93,5 +99,10 @@ public class Opponent : MonoBehaviour
             transform.position = _opponentStartingPosition;
             _opponentMoveToStartChecker = false;
         }
+    }
+    void OpponentHorizontalBorder()
+    {
+        Vector3 opponentBorder = new Vector3(Mathf.Clamp(transform.position.x, -1.470f, 1.470f), transform.position.y, transform.position.z);
+        transform.position = opponentBorder;
     }
 }

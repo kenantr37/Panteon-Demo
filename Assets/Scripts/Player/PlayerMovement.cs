@@ -5,8 +5,8 @@ using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Movement Process")]
-    [SerializeField] float _playerMoveForwardSpeed = 1f;
-    [SerializeField] float _mouseSpeed = 2.5f;
+    [SerializeField] float _playerMoveForwardSpeed = 1.3f;
+    [SerializeField] float _mouseSpeed = 1f;
     [SerializeField] float _mobilScreenSpeed = 0.005f;
     [SerializeField] Vector3 swerveFirstPosition, swerveLastPosition, distanceFirstLastPosition;
 
@@ -80,10 +80,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void PlayerHorizontalBorder()
     {
-        Vector3 a = new Vector3(Mathf.Clamp(transform.position.x, -1.470f, 1.470f), transform.position.y, transform.position.z);
-        transform.position = a;
+        Vector3 playerBorder = new Vector3(Mathf.Clamp(transform.position.x, -1.470f, 1.470f), transform.position.y, transform.position.z);
+        transform.position = playerBorder;
     }
-
     void MoveForward()
     {
         Vector3 playerForward = Vector3.forward * _playerMoveForwardSpeed * Time.deltaTime;
@@ -141,6 +140,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             swerveLastPosition = Input.mousePosition;
+
             if (swerveLastPosition != swerveFirstPosition)
             {
                 wall.material.color = new Color(1, 0, 0, Mathf.Lerp(0f, 1f, transparencyRation));
