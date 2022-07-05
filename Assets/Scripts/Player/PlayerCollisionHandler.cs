@@ -6,7 +6,7 @@ using TMPro;
 public class PlayerCollisionHandler : MonoBehaviour
 {
     PlayerMovement playerMovement;
-    float moveToCenter = 0;
+    float center = 0;
     Vector3 centerOfTheGame;
     public bool changeCameraPosition;
 
@@ -31,6 +31,9 @@ public class PlayerCollisionHandler : MonoBehaviour
         }
         if (collision.gameObject.tag == "Finish")
         {
+            Vector3 center = new Vector3(0, transform.position.y, transform.position.z);
+            transform.position = center;
+
             playerMovement.PlayerMoveForwardSpeed = 0;
             playerMovement.MouseSpeed = 0;
             playerMovement.MobilScreenSpeed = 0;
@@ -40,17 +43,6 @@ public class PlayerCollisionHandler : MonoBehaviour
             changeCameraPosition = true;
         }
     }
-    void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.tag == "Finish")
-        {
-            moveToCenter = Mathf.Lerp(0, 1, .5f);
-            centerOfTheGame = new Vector3(0, 0, transform.localPosition.z);
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, centerOfTheGame, moveToCenter * Time.deltaTime);
-            Debug.Log(moveToCenter);
-        }
-    }
-
     IEnumerator FinishLineWait()
     {
         Debug.Log(Mathf.RoundToInt(Time.time));

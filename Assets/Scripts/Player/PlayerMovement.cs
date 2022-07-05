@@ -74,8 +74,16 @@ public class PlayerMovement : MonoBehaviour
             SwerveMechanicMouse(_mouseSpeed);
             SwerveMechanicMobil(_mobilScreenSpeed);
             PlayerRankManager();
+            PlayerHorizontalBorder();
+
         }
     }
+    void PlayerHorizontalBorder()
+    {
+        Vector3 a = new Vector3(Mathf.Clamp(transform.position.x, -1.470f, 1.470f), transform.position.y, transform.position.z);
+        transform.position = a;
+    }
+
     void MoveForward()
     {
         Vector3 playerForward = Vector3.forward * _playerMoveForwardSpeed * Time.deltaTime;
@@ -92,8 +100,7 @@ public class PlayerMovement : MonoBehaviour
         {
             swerveLastPosition.x = Input.mousePosition.x;
             distanceFirstLastPosition = swerveLastPosition - swerveFirstPosition;
-            transform.Translate(distanceFirstLastPosition.x * Time.deltaTime * mouseSpeed * Time.deltaTime
-                , 0, 0);
+            transform.Translate(distanceFirstLastPosition.x * Time.deltaTime * mouseSpeed * Time.deltaTime, 0, 0);
         }
         else if (Input.GetMouseButtonUp(0))
         {
@@ -140,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
                 transparencyRation += .1f * Time.deltaTime;
                 paintedWallRatio = Mathf.RoundToInt(wall.material.color.a * 100);
 
-                wallScaleSize.transform.parent.localScale = new Vector3(1, Mathf.Lerp(0, 1, transparencyRation), 1);
+                wallScaleSize.transform.parent.localScale = new Vector3(1, Mathf.Lerp(0, 1f, transparencyRation), 1);
                 Debug.Log("You've just painted %" + paintedWallRatio + " of the wall!");
 
                 paintedWallRatioText.text = "YOU'VE JUST PAINTED %" + paintedWallRatio;
@@ -219,54 +226,58 @@ public class PlayerMovement : MonoBehaviour
     {
         if (count == 21)
         {
-            playerRankText.text = "Player Rank : 11";
+            playerRankText.text = Ranks.RANK.ToString() + ": 11\n" + Ranks.LOOSING.ToString();
 
         }
         if (count == 19)
         {
-            playerRankText.text = "Player Rank : 10";
+            playerRankText.text = Ranks.RANK.ToString() + ": 10 ";
 
         }
         if (count == 17)
         {
-            playerRankText.text = "Player Rank : 9";
+            playerRankText.text = Ranks.RANK.ToString() + ": 9 ";
 
         }
         if (count == 15)
         {
-            playerRankText.text = "Player Rank : 8";
+            playerRankText.text = Ranks.RANK.ToString() + ": 8 ";
         }
         if (count == 13)
         {
-            playerRankText.text = "Player Rank : 7";
+            playerRankText.text = Ranks.RANK.ToString() + ": 7 ";
 
         }
         if (count == 11)
         {
-            playerRankText.text = "Player Rank : 6";
+            playerRankText.text = Ranks.RANK.ToString() + ": 6 ";
         }
         if (count == 9)
         {
-            playerRankText.text = "Player Rank : 5";
+            playerRankText.text = Ranks.RANK.ToString() + ": 5 \n" + Ranks.FASTER.ToString() + Ranks.DUDE.ToString();
 
         }
         if (count == 7)
         {
-            playerRankText.text = "Player Rank : 4";
+            playerRankText.text = Ranks.RANK.ToString() + ": 4 ";
 
         }
         if (count == 5)
         {
-            playerRankText.text = "Player Rank : 3";
+            playerRankText.text = Ranks.RANK.ToString() + ": 3 ";
 
         }
         if (count == 3)
         {
-            playerRankText.text = "Player Rank : 2";
+            playerRankText.text = Ranks.RANK.ToString() + ": 2";
         }
         if (count == 1)
         {
-            playerRankText.text = "Player Rank : " + count;
+            playerRankText.text = Ranks.RANK.ToString() + ": " + count + "\n" + Ranks.AWSOME.ToString();
         }
+    }
+    enum Ranks
+    {
+        RANK, AWSOME, LOOSING, FASTER, DUDE
     }
 }

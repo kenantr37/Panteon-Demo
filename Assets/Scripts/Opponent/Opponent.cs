@@ -68,7 +68,7 @@ public class Opponent : MonoBehaviour
             float verticalDistanceBetweenNextObject = Mathf.Abs(transform.position.z - everyObject.position.z);
             float horizontalDistanceBetweenNextObject = Mathf.Abs(transform.position.x - everyObject.position.x);
 
-            if (verticalDistanceBetweenNextObject <= 1)
+            if (verticalDistanceBetweenNextObject <= 1f)
             {
                 Debug.DrawLine(transform.position, everyObject.position, Color.green);
                 calculateHypotenuse = Mathf.Sqrt(Mathf.Pow(horizontalDistanceBetweenNextObject, 2) + Mathf.Pow(verticalDistanceBetweenNextObject, 2));
@@ -76,12 +76,12 @@ public class Opponent : MonoBehaviour
                 if (calculateHypotenuse <= .5f && everyObject.position.x <= transform.position.x)
                 {
                     Debug.DrawLine(transform.position, everyObject.position, Color.red);
-                    transform.Translate(Vector3.right * Time.deltaTime * 10);
+                    transform.Translate(Vector3.right * Time.deltaTime);
                 }
                 else if (calculateHypotenuse <= .5f && everyObject.position.x > transform.position.x)
                 {
                     Debug.DrawLine(transform.position, everyObject.position, Color.red);
-                    transform.Translate(Vector3.left * Time.deltaTime * 10);
+                    transform.Translate(Vector3.left * Time.deltaTime);
                 }
             }
         }
