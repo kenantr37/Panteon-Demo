@@ -17,7 +17,7 @@ public class PlayerCollisionHandler : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("RotatingPlatform"))
+        if (collision.gameObject.CompareTag("RotatingPlatformRight") || collision.gameObject.CompareTag("RotatingPlatformLeft"))
         {
             transform.parent = collision.transform;
         }

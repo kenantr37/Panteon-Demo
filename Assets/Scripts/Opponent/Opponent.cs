@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class Opponent : MonoBehaviour
 {
     //Opponent movement Process
@@ -9,7 +9,7 @@ public class Opponent : MonoBehaviour
     [SerializeField] List<Transform> objectsToEscape;
 
     //wayPoint Process
-    [SerializeField] List<Transform> wayPoints;
+    //[SerializeField] List<Transform> wayPoints;
     [SerializeField] int wayPointIndex = 0;
 
     public float calculateHypotenuse;
@@ -27,44 +27,46 @@ public class Opponent : MonoBehaviour
     //Opponent FinishLine Rb
     Rigidbody _opponentRb;
 
-    //this is for distance with other opponents
-    GameObject otherOpponent;
-
+    //NAVMESH OF OPPONENT
+    NavMeshAgent opponentNavMesh;
+    [SerializeField] Transform opponentNavMeshFollowposition;
+    [SerializeField] bool _opponentNavMeshEnable;
+    [SerializeField] Transform opponentBridgeWayPoint;
 
     public Rigidbody OpponentRb { get { return _opponentRb; } set { _opponentRb = value; } }
+    public NavMeshAgent OpponentNavMesh { get { return opponentNavMesh; } set { opponentNavMesh = value; } }
+    public bool OpponentNavMeshEnable { get { return _opponentNavMeshEnable; } set { _opponentNavMeshEnable = value; } }
+
     void Awake()
     {
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         _opponentRb = GetComponent<Rigidbody>();
-
-        otherOpponent = GameObject.FindWithTag("Opponent");
+        opponentNavMesh = GetComponent<NavMeshAgent>();
     }
     void Start()
     {
         _opponentStartingPosition = transform.position;
+        _opponentNavMeshEnable = true;
+    }
+    void FixedUpdate()
+    {
+        OpponentMoveLeftRight();
     }
     void Update()
     {
         OpponentMoveForward();
-        OpponentMoveLeftRight();
         MoveToStart();
         OpponentHorizontalBorder();
     }
     void OpponentMoveForward()
     {
-        int lastWayPointIndex = wayPointIndex;
-        transform.position = Vector3.MoveTowards(transform.position, wayPoints[wayPointIndex].position, opponentMoveForwardSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Euler(Vector3.forward);
-
-        if (Vector3.Distance(transform.position, wayPoints[wayPointIndex].position) <= 3f)
+        if (_opponentNavMeshEnable)
         {
-            lastWayPointIndex = wayPointIndex;
-            wayPointIndex++;
-
-            if (wayPointIndex == wayPoints.Count)
-            {
-                wayPointIndex = lastWayPointIndex;
-            }
+            opponentNavMesh.destination = opponentNavMeshFollowposition.position;
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, opponentBridgeWayPoint.position, opponentMoveForwardSpeed * Time.deltaTime);
         }
     }
     void OpponentMoveLeftRight()
@@ -74,20 +76,20 @@ public class Opponent : MonoBehaviour
             float verticalDistanceBetweenNextObject = Mathf.Abs(transform.position.z - everyObject.position.z);
             float horizontalDistanceBetweenNextObject = Mathf.Abs(transform.position.x - everyObject.position.x);
 
-            if (verticalDistanceBetweenNextObject <= 1f)
+            if (verticalDistanceBetweenNextObject <= 2f)
             {
                 Debug.DrawLine(transform.position, everyObject.position, Color.green);
                 calculateHypotenuse = Mathf.Sqrt(Mathf.Pow(horizontalDistanceBetweenNextObject, 2) + Mathf.Pow(verticalDistanceBetweenNextObject, 2));
 
-                if (calculateHypotenuse <= 1f && everyObject.position.x <= transform.position.x)
+                if (calculateHypotenuse <= 1f && everyObject.position.x < transform.position.x)
                 {
                     Debug.DrawLine(transform.position, everyObject.position, Color.red);
-                    transform.Translate(Vector3.right * Time.deltaTime * 2f);
+                    transform.Translate(Vector3.right * Time.deltaTime * .9f);
                 }
-                else if (calculateHypotenuse <= .7f && everyObject.position.x > transform.position.x)
+                else if (calculateHypotenuse <= 1f && everyObject.position.x > transform.position.x)
                 {
                     Debug.DrawLine(transform.position, everyObject.position, Color.red);
-                    transform.Translate(Vector3.left * Time.deltaTime * 2f);
+                    transform.Translate(Vector3.left * Time.deltaTime * .9f);
                 }
             }
         }

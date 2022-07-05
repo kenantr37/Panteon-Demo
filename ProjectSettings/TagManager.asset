@@ -5,13 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - MandatoryObstacles
-  - RotatingPlatform
   - Ground
   - RotationStick
   - Rotator
   - Wall
   - Opponent
   - Holl
+  - RotatingPlatformRight
+  - RotatingPlatformLeft
+  - RotatingPlatform
+  - FirstWayPointChecker
+  - SecondWayPointChecker
+  - WayPoint
   layers:
   - Default
   - TransparentFX
