@@ -779,8 +779,8 @@ GameObject:
   - component: {fileID: 6686018515773901108}
   - component: {fileID: 7396072409398052981}
   - component: {fileID: 2538418267040851008}
-  - component: {fileID: 786030513557610525}
   - component: {fileID: 6686018515773901109}
+  - component: {fileID: 786030513557610525}
   m_Layer: 0
   m_Name: Girl
   m_TagString: Opponent
@@ -846,18 +846,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7dfe31f94795c46b2cabbb2241a150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opponentMoveForwardSpeed: 1.4
+  opponentMoveForwardSpeed: 2
   objectsToEscape:
-  - {fileID: 9029159908171112411, guid: 32b053976805d2f45966c4d540f3844d, type: 3}
-  - {fileID: 7733042680547195451, guid: 5227b81fd32956846be23903cc50441f, type: 3}
-  - {fileID: 7536950228678873791, guid: 788a77f735b5cc1479769749727e6724, type: 3}
-  - {fileID: 7536950228678873791, guid: 788a77f735b5cc1479769749727e6724, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   wayPointIndex: 0
   calculateHypotenuse: 0
   _opponentMoveToStartChecker: 0
-  _opponentNavMeshEnable: 0
+  _opponentFollowNavMeshEnable: 0
+  _opponentFollowWayPointActive: 0
   opponentNavMeshFollowposition: {fileID: 0}
   opponentBridgeWayPoint: {fileID: 0}
+--- !u!195 &6686018515773901109
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686018515773901099}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1
+  m_Speed: 1.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.5
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &786030513557610525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -870,28 +895,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81deb10a040c3094884311d152b85d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!195 &6686018515773901109
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6686018515773901099}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 1.4
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &6945287694143788942
 GameObject:
   m_ObjectHideFlags: 0

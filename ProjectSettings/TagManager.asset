@@ -15,8 +15,8 @@ TagManager:
   - RotatingPlatformLeft
   - RotatingPlatform
   - FirstWayPointChecker
-  - SecondWayPointChecker
   - WayPoint
+  - NavigatorActivator
   layers:
   - Default
   - TransparentFX

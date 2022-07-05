@@ -23,23 +23,27 @@ public class Opponent : MonoBehaviour
     Rigidbody _opponentRb;
 
     //NAVMESH OF OPPONENT
-    NavMeshAgent opponentNavMesh;
-    [SerializeField] bool _opponentNavMeshEnable;
+    NavMeshAgent _opponentNavMesh;
+    [SerializeField] bool _opponentFollowNavMeshEnable;
+    [SerializeField] bool _opponentFollowWayPointActive;
+
     [SerializeField] Transform opponentNavMeshFollowposition;
     [SerializeField] Transform opponentBridgeWayPoint;
 
     public Rigidbody OpponentRb { get { return _opponentRb; } set { _opponentRb = value; } }
-    public NavMeshAgent OpponentNavMesh { get { return opponentNavMesh; } set { opponentNavMesh = value; } }
-    public bool OpponentNavMeshEnable { get { return _opponentNavMeshEnable; } set { _opponentNavMeshEnable = value; } }
+    public NavMeshAgent OpponentNavMesh { get { return _opponentNavMesh; } set { _opponentNavMesh = value; } }
+    public bool OpponentFollowNavMeshEnable { get { return _opponentFollowNavMeshEnable; } set { _opponentFollowNavMeshEnable = value; } }
+    public bool OpponentWayPointActive { get { return _opponentFollowWayPointActive; } set { _opponentFollowWayPointActive = value; } }
 
     void Awake()
     {
         _opponentRb = GetComponent<Rigidbody>();
-        opponentNavMesh = GetComponent<NavMeshAgent>();
+        _opponentNavMesh = GetComponent<NavMeshAgent>();
     }
     void Start()
     {
         _opponentStartingPosition = transform.position;
+        _opponentFollowNavMeshEnable = true;
     }
     void Update()
     {
@@ -51,11 +55,11 @@ public class Opponent : MonoBehaviour
     }
     void OpponentMoveForward()
     {
-        if (_opponentNavMeshEnable)
+        if (_opponentFollowNavMeshEnable)
         {
-            opponentNavMesh.destination = opponentNavMeshFollowposition.position;
+            _opponentNavMesh.destination = opponentNavMeshFollowposition.position;
         }
-        else
+        if (_opponentFollowWayPointActive)
         {
             transform.position = Vector3.MoveTowards(transform.position, opponentBridgeWayPoint.position, opponentMoveForwardSpeed * Time.deltaTime);
         }
@@ -91,6 +95,9 @@ public class Opponent : MonoBehaviour
         {
             transform.position = _opponentStartingPosition;
             _opponentMoveToStartChecker = false;
+
+            _opponentFollowNavMeshEnable = true;
+            _opponentNavMesh.enabled = true;
         }
     }
     void OpponentHorizontalBorder()

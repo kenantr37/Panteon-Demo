@@ -36,9 +36,6 @@ public class OpponentCollisionHandler : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             transform.parent = null;
-            opponent.OpponentNavMeshEnable = true;
-            opponent.OpponentNavMesh.enabled = true;
-
         }
     }
     void OnCollisionStay(Collision collision)
@@ -56,8 +53,18 @@ public class OpponentCollisionHandler : MonoBehaviour
     {
         if (other.gameObject.CompareTag("FirstWayPointChecker"))
         {
-            opponent.OpponentNavMeshEnable = false;
+            opponent.OpponentFollowNavMeshEnable = false;
             opponent.OpponentNavMesh.enabled = false;
+
+            opponent.OpponentWayPointActive = true;
+        }
+        if (other.gameObject.CompareTag("NavigatorActivator"))
+        {
+            opponent.OpponentFollowNavMeshEnable = true;
+            opponent.OpponentNavMesh.enabled = true;
+
+            opponent.OpponentWayPointActive = false;
+
         }
     }
 }

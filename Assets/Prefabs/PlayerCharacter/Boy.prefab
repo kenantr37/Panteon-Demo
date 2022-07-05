@@ -205,8 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c1521f159a5784eafa9aa35ba150ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMoveForwardSpeed: 0.8
-  _mouseSpeed: 2.5
+  _playerMoveForwardSpeed: 1.3
+  _mouseSpeed: 1
   _mobilScreenSpeed: 0.005
   swerveFirstPosition: {x: 0, y: 0, z: 0}
   swerveLastPosition: {x: 0, y: 0, z: 0}
@@ -214,6 +214,7 @@ MonoBehaviour:
   wall: {fileID: 0}
   wallScaleSize: {fileID: 0}
   paintedWallRatio: 0
+  paintedWallRatioText: {fileID: 0}
   _finishLineArrived: 0
   _playerFirstRank: 0
   playerRankText: {fileID: 0}
@@ -230,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeCameraPosition: 0
+  wall: {fileID: 0}
 --- !u!54 &5541603032131434579
 Rigidbody:
   m_ObjectHideFlags: 0
