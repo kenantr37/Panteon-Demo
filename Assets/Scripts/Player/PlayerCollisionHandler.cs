@@ -5,18 +5,14 @@ using TMPro;
 
 public class PlayerCollisionHandler : MonoBehaviour
 {
-    PlayerMovement playerMovement;
-    float center = 0;
-    Vector3 centerOfTheGame;
-    public bool changeCameraPosition;
     [SerializeField] GameObject wall;
+    PlayerMovement playerMovement;
 
-    Animator playerAnim;
+    public bool changeCameraPosition;
 
     void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
-        playerAnim = GetComponent<Animator>();
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -50,11 +46,11 @@ public class PlayerCollisionHandler : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("RotatorRight"))
         {
-            playerMovement.PlayerRb.AddForce(Vector3.right * 250);
+            playerMovement.PlayerRb.AddForce(Vector3.left * 400);
         }
         if (collision.gameObject.CompareTag("RotatorLeft"))
         {
-            playerMovement.PlayerRb.AddForce(Vector3.left * 250);
+            playerMovement.PlayerRb.AddForce(Vector3.right * 400);
         }
         if (collision.gameObject.CompareTag("MandatoryObstacles"))
         {
@@ -65,6 +61,7 @@ public class PlayerCollisionHandler : MonoBehaviour
     {
         Debug.Log(Mathf.RoundToInt(Time.time));
         yield return new WaitForSeconds(3);
+
         playerMovement.FinishLineArrived = true;
         playerMovement.paintedWallRatioText.gameObject.SetActive(true);
     }

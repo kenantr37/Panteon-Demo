@@ -35,11 +35,13 @@ public class OpponentCollisionHandler : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("RotatorRight"))
         {
-            opponentRb.AddForce(Vector3.right * 250);
+            opponent.OpponentRb.AddTorque(Vector3.left * 1000);
+            Debug.Log("deðdi");
         }
         if (collision.gameObject.CompareTag("RotatorLeft"))
         {
-            opponentRb.AddForce(Vector3.left * 250);
+            opponent.OpponentRb.AddTorque(Vector3.right * 1000);
+            Debug.Log("deðdi");
         }
     }
     void OnCollisionStay(Collision collision)

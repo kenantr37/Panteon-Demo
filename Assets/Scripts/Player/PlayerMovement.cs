@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     //Camera rb setting
     Rigidbody _playerRb;
 
-    //UI
+    //Game Manager
     GameManager gameManager;
 
     //Animation 
@@ -98,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void PlayerHorizontalBorder()
     {
+        //to make player stay in horizontal border
         Vector3 playerBorder = new Vector3(Mathf.Clamp(transform.position.x, -1.470f, 1.470f), transform.position.y, transform.position.z);
         transform.position = playerBorder;
     }
@@ -109,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void SwerveMechanicMouse(float mouseSpeed)
     {
+        //swerve mechanic for mouse 
         if (Input.GetMouseButtonDown(0))
         {
             swerveFirstPosition.x = Input.mousePosition.x;
@@ -127,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void SwerveMechanicMobil(float mobilScreenSpeed)
     {
+        //swerve mechanic for mobil devices
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -151,6 +154,10 @@ public class PlayerMovement : MonoBehaviour
     }
     void PaintTheWallMouse()
     {
+        // player can change scale of the wall with swerve mechanic.
+        // I increase opacity during swerve mechanic
+        // when scale of the wall is %100, player can not scale wall
+        // in this case, it look like painting the wall
         if (Input.GetMouseButtonDown(0))
         {
             swerveFirstPosition = Input.mousePosition;
@@ -183,6 +190,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void PaintTheWallMobil()
     {
+        // painting for mobile devices
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -216,6 +224,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void PlayerFirsRank()
     {
+        //to get starting rank of the player at the beginning of the game
         foreach (Opponent opponent in opponents)
         {
             if (transform.position.z <= opponent.transform.position.z)
@@ -226,6 +235,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void PLayerDead()
     {
+        // to check is player dead or alive?
         if (_playerDeadChecker)
         {
             transform.position = playerFirstPosition;
@@ -234,6 +244,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void PlayerRankManager()
     {
+        // getting current rank of the player
         float count = opponents.Length + 1;
 
         for (int i = 0; i < opponents.Length; i++)
@@ -250,6 +261,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void ManuelCountDisplayer(float count)
     {
+        // I can't increase "count" 1 unit because of update method 
+        // update increase "count" 2 units
+        // that's why I handle "count" units with this method
         if (count == 21)
         {
             playerRankText.text = Ranks.RANK.ToString() + ": 11\n" + Ranks.LOOSING.ToString();

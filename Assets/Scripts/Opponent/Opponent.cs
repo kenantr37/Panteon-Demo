@@ -4,17 +4,13 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Opponent : MonoBehaviour
 {
-    //Opponent movement Process
+    [Header("Opponent movement Process")]
     [SerializeField] float _opponentMoveForwardSpeed;
     [SerializeField] List<Transform> objectsToEscape;
 
-    //wayPoint Process
-    //[SerializeField] List<Transform> wayPoints;
-    [SerializeField] int wayPointIndex = 0;
-
     public float calculateHypotenuse;
 
-    //Spaning to starting position of the opponent Process
+    [Header("Spaning to starting position of the opponent Process")]
     [SerializeField] bool _opponentMoveToStartChecker;
     Vector3 _opponentStartingPosition;
     public bool OppoonentStartingPosition { get { return _opponentMoveToStartChecker; } set { _opponentMoveToStartChecker = value; } }
@@ -22,16 +18,16 @@ public class Opponent : MonoBehaviour
     //Opponent FinishLine Rb
     Rigidbody _opponentRb;
 
-    //NAVMESH OF OPPONENT
+    [Header("Navmesh process of opponent")]
     NavMeshAgent _opponentNavMesh;
     [SerializeField] bool _opponentFollowNavMeshEnable;
     [SerializeField] bool _opponentFollowWayPointActive;
-
     [SerializeField] Transform opponentNavMeshFollowposition;
     [SerializeField] Transform opponentBridgeWayPoint;
-    //game manager
+
+    //gamemanager of opponent
     GameManager gameManager;
-    //animator
+    //opponent animator
     Animator opponentAnimator;
     bool _opponentStopAnim;
 
@@ -57,7 +53,6 @@ public class Opponent : MonoBehaviour
     }
     void Update()
     {
-
         if (gameManager.isGameStarted)
         {
             opponentAnimator.SetBool("RunOpp", true);
@@ -71,10 +66,10 @@ public class Opponent : MonoBehaviour
         {
             opponentAnimator.SetBool("RunOpp", false);
         }
-
     }
     void OpponentMoveForward()
     {
+        //opponent can move forward by referencing navmesh and my own waypoint system
         if (_opponentFollowNavMeshEnable)
         {
             _opponentNavMesh.destination = opponentNavMeshFollowposition.position;
@@ -87,12 +82,13 @@ public class Opponent : MonoBehaviour
     }
     void OpponentMoveLeftRight()
     {
+        // I used hypotenuse to calculate distance between opponent and every single obstacle
         foreach (Transform everyObject in objectsToEscape)
         {
             float verticalDistanceBetweenNextObject = Mathf.Abs(transform.position.z - everyObject.position.z);
             float horizontalDistanceBetweenNextObject = Mathf.Abs(transform.position.x - everyObject.position.x);
 
-            if (verticalDistanceBetweenNextObject <= 2f)
+            if (verticalDistanceBetweenNextObject <= 1f)
             {
                 Debug.DrawLine(transform.position, everyObject.position, Color.green);
                 calculateHypotenuse = Mathf.Sqrt(Mathf.Pow(horizontalDistanceBetweenNextObject, 2) + Mathf.Pow(verticalDistanceBetweenNextObject, 2));
@@ -112,6 +108,7 @@ public class Opponent : MonoBehaviour
     }
     void MoveToStart()
     {
+        //if opponent dead, spawn initial location
         if (_opponentMoveToStartChecker)
         {
             transform.position = _opponentStartingPosition;
