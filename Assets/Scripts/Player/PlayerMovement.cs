@@ -33,18 +33,28 @@ public class PlayerMovement : MonoBehaviour
     //Camera rb setting
     Rigidbody _playerRb;
 
+    //UI
+    GameManager gameManager;
+
+    //Animation 
+    Animator _playerAnimator;
+    bool _playerStopRunning;
+
     public bool FinishLineArrived { get { return _finishLineArrived; } set { _finishLineArrived = value; } }
     public float PlayerMoveForwardSpeed { get { return _playerMoveForwardSpeed; } set { _playerMoveForwardSpeed = value; } }
     public float MouseSpeed { get { return _mouseSpeed; } set { _mouseSpeed = value; } }
     public float MobilScreenSpeed { get { return _mobilScreenSpeed; } set { _mobilScreenSpeed = value; } }
     public bool PlayerDeadChecker { get { return _playerDeadChecker; } set { _playerDeadChecker = value; } }
     public Rigidbody PlayerRb { get { return _playerRb; } set { _playerRb = value; } }
+    public bool PlayerStopRunning { get { return _playerStopRunning; } set { _playerStopRunning = value; } }
 
     void Awake()
     {
         opponents = FindObjectsOfType<Opponent>();
         _playerRb = GetComponent<Rigidbody>();
         PlayerFirsRank();
+        gameManager = FindObjectOfType<GameManager>();
+        _playerAnimator = GetComponent<Animator>();
     }
     void Start()
     {
@@ -61,21 +71,29 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        PLayerDead();
-
-        if (FinishLineArrived)
+        if (gameManager.isGameStarted)
         {
-            PaintTheWallMouse();
-            PaintTheWallMobil();
+
+            if (FinishLineArrived)
+            {
+                PaintTheWallMouse();
+                PaintTheWallMobil();
+            }
+            else
+            {
+                _playerAnimator.SetBool("RunPlayer", true);
+
+                MoveForward();
+                SwerveMechanicMouse(_mouseSpeed);
+                SwerveMechanicMobil(_mobilScreenSpeed);
+                PlayerRankManager();
+                PlayerHorizontalBorder();
+            }
+            PLayerDead();
         }
-        else
+        if (_playerStopRunning)
         {
-            MoveForward();
-            SwerveMechanicMouse(_mouseSpeed);
-            SwerveMechanicMobil(_mobilScreenSpeed);
-            PlayerRankManager();
-            PlayerHorizontalBorder();
-
+            _playerAnimator.SetBool("RunPlayer", false);
         }
     }
     void PlayerHorizontalBorder()
@@ -151,6 +169,10 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("You've just painted %" + paintedWallRatio + " of the wall!");
 
                 paintedWallRatioText.text = "%" + paintedWallRatio;
+                if (paintedWallRatio == 100)
+                {
+                    gameManager.RestartGame();
+                }
             }
         }
         if (Input.GetMouseButtonUp(0))
@@ -179,6 +201,10 @@ public class PlayerMovement : MonoBehaviour
 
                     wallScaleSize.transform.parent.localScale = new Vector3(1, Mathf.Lerp(0, 1, transparencyRation), 1);
                     paintedWallRatioText.text = "%" + paintedWallRatio;
+                    if (paintedWallRatio == 100)
+                    {
+                        gameManager.RestartGame();
+                    }
                 }
             }
             if (touch.phase == TouchPhase.Ended)

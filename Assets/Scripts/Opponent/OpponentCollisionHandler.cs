@@ -7,25 +7,17 @@ public class OpponentCollisionHandler : MonoBehaviour
 {
     Opponent opponent;
     Rigidbody opponentRb;
-    Animator opponentAnim;
 
     void Start()
     {
         opponent = GetComponent<Opponent>();
         opponentRb = GetComponent<Rigidbody>();
-        opponentAnim = GetComponent<Animator>();
     }
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "MandatoryObstacles" || collision.gameObject.tag == "Holl")
         {
             opponent.OppoonentStartingPosition = true;
-        }
-        if (collision.gameObject.CompareTag("Finish"))
-        {
-            opponent.OpponentRb.isKinematic = true;
-            opponentAnim.SetBool("RunOpp", false);
-            opponent.OpponentNavMesh.enabled = false;
         }
         if (collision.gameObject.CompareTag("RotatingPlatformRight"))
         {
@@ -83,10 +75,8 @@ public class OpponentCollisionHandler : MonoBehaviour
         if (other.gameObject.CompareTag("OpponentFinish"))
         {
             opponent.OpponentRb.isKinematic = true;
-            opponentAnim.SetBool("RunOpp", false);
-            opponent.OpponentNavMesh.destination = transform.position;
-
-
+            opponent.OpponentNavMesh.enabled = false;
+            opponent.OpponentStopAnim = true;
         }
     }
 }

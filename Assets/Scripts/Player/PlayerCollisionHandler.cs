@@ -35,8 +35,8 @@ public class PlayerCollisionHandler : MonoBehaviour
         }
         if (collision.gameObject.tag == "Finish")
         {
+            playerMovement.PlayerStopRunning = true;
             wall.gameObject.SetActive(true);
-
             Vector3 center = new Vector3(0, transform.position.y, transform.position.z);
             transform.position = center;
 
@@ -45,7 +45,6 @@ public class PlayerCollisionHandler : MonoBehaviour
             playerMovement.MobilScreenSpeed = 0;
             StartCoroutine(FinishLineWait());
 
-            playerAnim.SetBool("RunPlayer", false);
             playerMovement.PlayerRb.isKinematic = true;
             changeCameraPosition = true;
         }

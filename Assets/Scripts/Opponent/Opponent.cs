@@ -29,17 +29,26 @@ public class Opponent : MonoBehaviour
 
     [SerializeField] Transform opponentNavMeshFollowposition;
     [SerializeField] Transform opponentBridgeWayPoint;
+    //game manager
+    GameManager gameManager;
+    //animator
+    Animator opponentAnimator;
+    bool _opponentStopAnim;
 
     public Rigidbody OpponentRb { get { return _opponentRb; } set { _opponentRb = value; } }
     public NavMeshAgent OpponentNavMesh { get { return _opponentNavMesh; } set { _opponentNavMesh = value; } }
     public bool OpponentFollowNavMeshEnable { get { return _opponentFollowNavMeshEnable; } set { _opponentFollowNavMeshEnable = value; } }
     public bool OpponentWayPointActive { get { return _opponentFollowWayPointActive; } set { _opponentFollowWayPointActive = value; } }
     public float OppponentMoveForwardSpeed { get { return _opponentMoveForwardSpeed; } set { _opponentMoveForwardSpeed = value; } }
+    public bool OpponentStopAnim { get { return _opponentStopAnim; } set { _opponentStopAnim = value; } }
 
     void Awake()
     {
         _opponentRb = GetComponent<Rigidbody>();
         _opponentNavMesh = GetComponent<NavMeshAgent>();
+        gameManager = FindObjectOfType<GameManager>();
+        opponentAnimator = GetComponent<Animator>();
+
     }
     void Start()
     {
@@ -48,10 +57,20 @@ public class Opponent : MonoBehaviour
     }
     void Update()
     {
-        MoveToStart();
-        OpponentHorizontalBorder();
-        OpponentMoveLeftRight();
-        OpponentMoveForward();
+
+        if (gameManager.isGameStarted)
+        {
+            opponentAnimator.SetBool("RunOpp", true);
+
+            MoveToStart();
+            OpponentHorizontalBorder();
+            OpponentMoveLeftRight();
+            OpponentMoveForward();
+        }
+        if (_opponentStopAnim)
+        {
+            opponentAnimator.SetBool("RunOpp", false);
+        }
 
     }
     void OpponentMoveForward()
