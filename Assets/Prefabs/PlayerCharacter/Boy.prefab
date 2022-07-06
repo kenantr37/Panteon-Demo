@@ -231,8 +231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16ddaf6962e56947b481947d05ebcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeCameraPosition: 0
   wall: {fileID: 0}
+  changeCameraPosition: 0
 --- !u!54 &5541603032131434579
 Rigidbody:
   m_ObjectHideFlags: 0
