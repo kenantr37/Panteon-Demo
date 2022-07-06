@@ -1,2 +1,2 @@
 # Panteon-Demo
-Panteon Demo for Interview
+ Hypercasual Game Demo made by me for interview with Panteon Games.
