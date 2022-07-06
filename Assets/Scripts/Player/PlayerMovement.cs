@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
                 wallScaleSize.transform.parent.localScale = new Vector3(1, Mathf.Lerp(0, 1f, transparencyRation), 1);
                 Debug.Log("You've just painted %" + paintedWallRatio + " of the wall!");
 
-                paintedWallRatioText.text = "YOU'VE JUST PAINTED %" + paintedWallRatio;
+                paintedWallRatioText.text = "%" + paintedWallRatio;
             }
         }
         if (Input.GetMouseButtonUp(0))
@@ -178,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
                     paintedWallRatio = Mathf.RoundToInt(wall.material.color.a * 100);
 
                     wallScaleSize.transform.parent.localScale = new Vector3(1, Mathf.Lerp(0, 1, transparencyRation), 1);
-                    Debug.Log("You've just painted %" + paintedWallRatio + " of the wall!");
+                    paintedWallRatioText.text = "%" + paintedWallRatio;
                 }
             }
             if (touch.phase == TouchPhase.Ended)

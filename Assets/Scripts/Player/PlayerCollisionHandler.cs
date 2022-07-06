@@ -53,6 +53,10 @@ public class PlayerCollisionHandler : MonoBehaviour
         {
             playerMovement.PlayerRb.AddForce(Vector3.left * 250);
         }
+        if (collision.gameObject.CompareTag("MandatoryObstacles"))
+        {
+            playerMovement.PlayerDeadChecker = true;
+        }
     }
     IEnumerator FinishLineWait()
     {
