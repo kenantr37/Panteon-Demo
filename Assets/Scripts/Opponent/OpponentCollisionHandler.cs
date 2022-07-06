@@ -7,11 +7,13 @@ public class OpponentCollisionHandler : MonoBehaviour
 {
     Opponent opponent;
     Rigidbody opponentRb;
+    Animator opponentAnim;
 
     void Start()
     {
         opponent = GetComponent<Opponent>();
         opponentRb = GetComponent<Rigidbody>();
+        opponentAnim = GetComponent<Animator>();
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -22,6 +24,8 @@ public class OpponentCollisionHandler : MonoBehaviour
         if (collision.gameObject.CompareTag("Finish"))
         {
             opponent.OpponentRb.isKinematic = true;
+            opponentAnim.SetBool("RunOpp", false);
+            opponent.OpponentNavMesh.enabled = false;
         }
         if (collision.gameObject.CompareTag("RotatingPlatformRight"))
         {
@@ -74,6 +78,15 @@ public class OpponentCollisionHandler : MonoBehaviour
 
             opponent.OpponentWayPointActive = false;
             opponent.OppponentMoveForwardSpeed = 0;
+        }
+
+        if (other.gameObject.CompareTag("OpponentFinish"))
+        {
+            opponent.OpponentRb.isKinematic = true;
+            opponentAnim.SetBool("RunOpp", false);
+            opponent.OpponentNavMesh.destination = transform.position;
+
+
         }
     }
 }

@@ -11,9 +11,12 @@ public class PlayerCollisionHandler : MonoBehaviour
     public bool changeCameraPosition;
     [SerializeField] GameObject wall;
 
+    Animator playerAnim;
+
     void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        playerAnim = GetComponent<Animator>();
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -42,6 +45,7 @@ public class PlayerCollisionHandler : MonoBehaviour
             playerMovement.MobilScreenSpeed = 0;
             StartCoroutine(FinishLineWait());
 
+            playerAnim.SetBool("RunPlayer", false);
             playerMovement.PlayerRb.isKinematic = true;
             changeCameraPosition = true;
         }

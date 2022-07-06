@@ -781,6 +781,7 @@ GameObject:
   - component: {fileID: 2538418267040851008}
   - component: {fileID: 6686018515773901109}
   - component: {fileID: 786030513557610525}
+  - component: {fileID: 3074375240505222253}
   m_Layer: 0
   m_Name: Girl
   m_TagString: Opponent
@@ -928,6 +929,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81deb10a040c3094884311d152b85d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &3074375240505222253
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686018515773901099}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 6ef48ee4fa649bf46a589d8b763689aa, type: 3}
+  m_Controller: {fileID: 9100000, guid: ca6a22357ec13ad47be11b89532032bd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6945287694143788942
 GameObject:
   m_ObjectHideFlags: 0

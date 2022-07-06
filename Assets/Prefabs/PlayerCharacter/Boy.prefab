@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 6474844232684378964}
   - component: {fileID: 5541603032131434579}
   - component: {fileID: 1629345598507477169}
+  - component: {fileID: 8899205766901537360}
   m_Layer: 0
   m_Name: Boy
   m_TagString: Player
@@ -205,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c1521f159a5784eafa9aa35ba150ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMoveForwardSpeed: 1
+  _playerMoveForwardSpeed: 1.3
   _mouseSpeed: 1
   _mobilScreenSpeed: 0.005
   swerveFirstPosition: {x: 0, y: 0, z: 0}
@@ -262,6 +263,25 @@ CapsuleCollider:
   m_Height: 2.4977596
   m_Direction: 1
   m_Center: {x: 0.00000026077032, y: 1.192833, z: 0.00016313043}
+--- !u!95 &8899205766901537360
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3211601373603358381}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: a8bf75e0fac7e684882e19be5246e2e6, type: 3}
+  m_Controller: {fileID: 9100000, guid: 3d84d63f63190ee46859a77755303c30, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3262639526250110293
 GameObject:
   m_ObjectHideFlags: 0

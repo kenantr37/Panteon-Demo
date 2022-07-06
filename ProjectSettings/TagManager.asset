@@ -18,6 +18,7 @@ TagManager:
   - NavigatorActivator
   - RotatorRight
   - RotatorLeft
+  - OpponentFinish
   layers:
   - Default
   - TransparentFX
