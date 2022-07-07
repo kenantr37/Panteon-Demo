@@ -19,6 +19,8 @@ TagManager:
   - RotatorRight
   - RotatorLeft
   - OpponentFinish
+  - Percentage
+  - Brush
   layers:
   - Default
   - TransparentFX

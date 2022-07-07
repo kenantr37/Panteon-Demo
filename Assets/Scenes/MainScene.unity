@@ -4454,7 +4454,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -59.1}
+  m_AnchoredPosition: {x: 0, y: -59.100098}
   m_SizeDelta: {x: 612.1, y: 228.30005}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &763692193
@@ -10437,6 +10437,10 @@ PrefabInstance:
       propertyPath: playerRankText
       value: 
       objectReference: {fileID: 763692193}
+    - target: {fileID: 5143574615526852078, guid: 4b3dd3d5f95bdcd458392eb627906240, type: 3}
+      propertyPath: _mobilScreenSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
     - target: {fileID: 5143574615526852078, guid: 4b3dd3d5f95bdcd458392eb627906240, type: 3}
       propertyPath: paintedWallRatioText
       value: 
