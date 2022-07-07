@@ -16,7 +16,6 @@ public class BrushBorder : MonoBehaviour
     {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xBorderForWall, xBorderForWall),
             transform.position.y, Mathf.Clamp(transform.position.z, -yBorderForWall, yBorderForWall));
-
     }
     void OnTriggerEnter(Collider other)
     {
@@ -24,7 +23,6 @@ public class BrushBorder : MonoBehaviour
         {
             brush.canPaint = true;
         }
-
     }
     void OnTriggerExit(Collider other)
     {

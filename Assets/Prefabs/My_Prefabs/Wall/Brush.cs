@@ -36,7 +36,7 @@ public class Brush : MonoBehaviour
                 {
                     if (Input.mousePosition.x > 350 && Input.mousePosition.x < 950 && canPaint)
                     {
-                        var go = Instantiate(brush, hit.point + transform.position, Quaternion.identity);
+                        var go = Instantiate(brush, hit.point - transform.position, Quaternion.identity);
                         go.transform.localScale = Vector3.one * brushSize;
 
                     }
