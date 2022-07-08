@@ -76,8 +76,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (FinishLineArrived)
             {
-                PaintTheWallMouse();
-                PaintTheWallMobil();
+                //PaintTheWallMouse();
+                //PaintTheWallMobil();
             }
             else
             {

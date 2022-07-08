@@ -5,6 +5,7 @@ using TMPro;
 public class Brush : MonoBehaviour
 {
     [SerializeField] GameObject brush;
+    [SerializeField] Vector3 brushDistanceBetweenWall;
     [SerializeField] float brushSize;
     public bool canPaint;
 
@@ -14,49 +15,56 @@ public class Brush : MonoBehaviour
 
     Vector3 lastPosition;
     Vector3 currentPosition;
+    PlayerMovement playerMovement;
+
+    void Awake()
+    {
+        playerMovement = FindObjectOfType<PlayerMovement>();
+    }
     void Start()
     {
         canPaint = true;
     }
-    void Update()
+    void FixedUpdate()
     {
 
-        if (Input.GetMouseButton(0))
+        if (playerMovement.FinishLineArrived)
         {
-            firstPosition = Input.mousePosition;
-            lastPosition = transform.position;
-
-        }
-        if (Input.GetMouseButton(0))
-        {
-            secondPosition = Input.mousePosition;
-            isCursorMoved = secondPosition - firstPosition;
-            currentPosition = transform.position;
-
-
-            if (isCursorMoved != firstPosition)
+            if (Input.GetMouseButton(0))
             {
+                firstPosition = Input.mousePosition;
+                lastPosition = transform.position;
 
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
+            }
+            if (Input.GetMouseButton(0))
+            {
+                secondPosition = Input.mousePosition;
+                isCursorMoved = secondPosition - firstPosition;
+                currentPosition = transform.position;
 
-                if (Physics.Raycast(ray, out hit))
+
+                if (isCursorMoved != firstPosition)
                 {
-                    if (Input.mousePosition.x > 350 && Input.mousePosition.x < 950 && canPaint && Vector3.Distance(lastPosition, firstPosition) > 50)
+
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
+
+                    if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Percentage"))
                     {
-                        var draw = Instantiate(brush, hit.point + transform.position * .01f, Quaternion.identity, transform);
+
+                        var draw = Instantiate(brush, hit.point + transform.parent.localPosition * 500f, transform.parent.rotation, transform.parent);
                         draw.transform.localScale = Vector3.one * brushSize;
 
+
+                        lastPosition = currentPosition;
                     }
-                    lastPosition = currentPosition;
                 }
             }
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            firstPosition = Vector3.zero;
-            secondPosition = Vector3.zero;
+            if (Input.GetMouseButtonUp(0))
+            {
+                firstPosition = Vector3.zero;
+                secondPosition = Vector3.zero;
+            }
         }
     }
-
 }
