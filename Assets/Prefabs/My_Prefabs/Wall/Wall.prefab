@@ -96,7 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brush: {fileID: 3048091996646643283, guid: 080a2f023bf214f438bb7cc0e50366a4, type: 3}
-  brushSize: 0.1
+  brushSize: 0.12
+  rayX: {fileID: 0}
+  rayY: {fileID: 0}
   canPaint: 0
 --- !u!64 &6268690316989596271
 MeshCollider:

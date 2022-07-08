@@ -6,5 +6,6 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     public TextMeshProUGUI percentageCounter;
-    public int initialCountNumber = 0;
+    public float initialCountNumber = 0;
+
 }

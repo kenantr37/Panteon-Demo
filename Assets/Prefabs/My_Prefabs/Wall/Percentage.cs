@@ -5,28 +5,43 @@ using UnityEngine;
 public class Percentage : MonoBehaviour
 {
     ScoreManager scoreManager;
-    bool artýrýldý;
     GameObject[] brush;
+    Brush brushScript;
+    bool artýrýldý;
+
     void Awake()
     {
         scoreManager = FindObjectOfType<ScoreManager>();
+        brushScript = FindObjectOfType<Brush>();
     }
-
     void Update()
     {
         BrushDeleter();
+
+        if (scoreManager.initialCountNumber == 100)
+        {
+            brushScript.canPaint = false;
+        }
     }
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Brush") && !artýrýldý)
         {
             artýrýldý = true;
-            scoreManager.initialCountNumber += 1;
+
+            if (scoreManager.initialCountNumber < 80)
+            {
+                scoreManager.initialCountNumber += 1;
+            }
+            else
+            {
+                scoreManager.initialCountNumber += .5f;
+
+            }
             StartCoroutine(IncreasePercentage());
             StartCoroutine(DestroyPercentage());
         }
     }
-
     void BrushDeleter()
     {
         brush = GameObject.FindGameObjectsWithTag("Brush");
@@ -39,6 +54,10 @@ public class Percentage : MonoBehaviour
                 {
                     Destroy(brush[i + 1]);
                 }
+                if (brushScript.canPaint == false)
+                {
+                    Destroy(brush[i]);
+                }
             }
         }
         else
@@ -46,11 +65,10 @@ public class Percentage : MonoBehaviour
             return;
         }
     }
-
     IEnumerator IncreasePercentage()
     {
         yield return new WaitForSeconds(.4f);
-        scoreManager.percentageCounter.text = "%" + scoreManager.initialCountNumber;
+        scoreManager.percentageCounter.text = "%" + Mathf.RoundToInt(scoreManager.initialCountNumber);
     }
     IEnumerator DestroyPercentage()
     {

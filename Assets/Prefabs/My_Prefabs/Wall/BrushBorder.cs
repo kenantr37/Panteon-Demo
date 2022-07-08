@@ -6,7 +6,7 @@ public class BrushBorder : MonoBehaviour
 {
     Brush brush;
     [SerializeField] float xBorderForWall = 3.754f;
-    [SerializeField] float yBorderForWall = 3.754f;
+    [SerializeField] float zBorderForWall = 3.754f;
 
     void Awake()
     {
@@ -15,7 +15,7 @@ public class BrushBorder : MonoBehaviour
     void LateUpdate()
     {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xBorderForWall, xBorderForWall),
-            transform.position.y, Mathf.Clamp(transform.position.z, -yBorderForWall, yBorderForWall));
+            transform.position.y, Mathf.Clamp(transform.position.z, -zBorderForWall, zBorderForWall));
     }
     void OnTriggerEnter(Collider other)
     {
