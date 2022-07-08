@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour
     {
         if (playerCollisionHandler.changeCameraPosition)
         {
-            Vector3 newDistanceFromPlayer = new Vector3(0, Mathf.Lerp(distanceFromPlayer.y, 5.03999996f, Time.deltaTime * 1f), -3.3499999f);
+            Vector3 newDistanceFromPlayer = new Vector3(0, Mathf.Lerp(distanceFromPlayer.y, 5, Time.deltaTime * 1f), -3);
             distanceFromPlayer = newDistanceFromPlayer;
         }
     }

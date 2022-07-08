@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class OpponentCollisionHandler : MonoBehaviour
 {
     Opponent opponent;
     Rigidbody opponentRb;
+    [SerializeField] Transform navigator;
+    NavMeshAgent _opponentNavMesh;
 
     void Start()
     {
@@ -43,16 +46,23 @@ public class OpponentCollisionHandler : MonoBehaviour
             opponent.OpponentRb.AddTorque(Vector3.right * 1000);
             Debug.Log("deðdi");
         }
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            _opponentNavMesh.gameObject.SetActive(false);
+        }
     }
     void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("RotatingPlatformRight"))
+        if (collision.gameObject.CompareTag("RotatingPlatformRight") || collision.gameObject.CompareTag("RotatingPlatformLeft"))
         {
-            opponentRb.velocity = Vector3.right * 113f * Time.deltaTime;
-        }
-        if (collision.gameObject.CompareTag("RotatingPlatformLeft"))
-        {
-            opponentRb.velocity = Vector3.left * 113f * Time.deltaTime;
+            if (transform.position.x <= -.175)
+            {
+                opponentRb.velocity = Vector3.right * 115.5f * Time.fixedDeltaTime;
+            }
+            if (transform.position.x > -.225)
+            {
+                opponentRb.velocity = Vector3.left * 15.5f * Time.fixedDeltaTime;
+            }
         }
     }
     void OnTriggerEnter(Collider other)
@@ -63,7 +73,7 @@ public class OpponentCollisionHandler : MonoBehaviour
             opponent.OpponentNavMesh.enabled = false;
 
             opponent.OpponentWayPointActive = true;
-            opponent.OppponentMoveForwardSpeed = 1.5f;
+            opponent.OppponentMoveForwardSpeed = 1.35f;
         }
         if (other.gameObject.CompareTag("NavigatorActivator"))
         {

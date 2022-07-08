@@ -7,12 +7,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Movement Process")]
     [SerializeField] float _playerMoveForwardSpeed = 1.3f;
     [SerializeField] float _mouseSpeed = 1f;
-    [SerializeField] float _mobilScreenSpeed = 0.005f;
+    [SerializeField] float _mobilScreenSpeed = 0.0001f;
     [SerializeField] Vector3 swerveFirstPosition, swerveLastPosition, distanceFirstLastPosition;
 
     [Header("Wall Process")]
-    [SerializeField] Renderer wall;
-    [SerializeField] GameObject wallScaleSize;
+    [SerializeField] GameObject wall;
     [SerializeField] float paintedWallRatio;
     public TextMeshProUGUI paintedWallRatioText;
     float transparencyRation;
@@ -23,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Player Ranking")]
     [SerializeField] int _playerFirstRank;
-    [SerializeField] TextMeshProUGUI playerRankText;
+    public TextMeshProUGUI playerRankText;
     Opponent[] opponents;
 
     //Did player fall to holl?
@@ -39,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
     //Animation 
     Animator _playerAnimator;
     bool _playerStopRunning;
+
+    //FinishLine Text Change
+    public bool paintTime;
 
     public bool FinishLineArrived { get { return _finishLineArrived; } set { _finishLineArrived = value; } }
     public float PlayerMoveForwardSpeed { get { return _playerMoveForwardSpeed; } set { _playerMoveForwardSpeed = value; } }
@@ -66,16 +68,13 @@ public class PlayerMovement : MonoBehaviour
 
         playerFirstPosition = transform.position;
         paintedWallRatioText.gameObject.SetActive(false);
-
     }
-
     void Update()
     {
         if (gameManager.isGameStarted)
         {
             if (FinishLineArrived)
             {
-
             }
             else
             {
@@ -84,7 +83,14 @@ public class PlayerMovement : MonoBehaviour
                 MoveForward();
                 SwerveMechanicMouse(_mouseSpeed);
                 SwerveMechanicMobil(_mobilScreenSpeed);
-                PlayerRankManager();
+                if (!paintTime)
+                {
+                    PlayerRankManager();
+                }
+                else
+                {
+                    playerRankText.text = "PAINTING TIME!!";
+                }
                 PlayerHorizontalBorder();
             }
             PLayerDead();
@@ -144,76 +150,6 @@ public class PlayerMovement : MonoBehaviour
                     , 0, 0);
             }
             else if (touch.phase == TouchPhase.Ended)
-            {
-                swerveLastPosition = Vector3.zero;
-                swerveLastPosition = Vector3.zero;
-            }
-        }
-    }
-    void PaintTheWallMouse()
-    {
-        // player can change scale of the wall with swerve mechanic.
-        // I increase opacity during swerve mechanic
-        // when scale of the wall is %100, player can not scale wall
-        // in this case, it look like painting the wall
-        if (Input.GetMouseButtonDown(0))
-        {
-            swerveFirstPosition = Input.mousePosition;
-        }
-        if (Input.GetMouseButton(0))
-        {
-            swerveLastPosition = Input.mousePosition;
-
-            if (swerveLastPosition != swerveFirstPosition)
-            {
-                wall.material.color = new Color(1, 0, 0, Mathf.Lerp(0f, 1f, transparencyRation));
-                transparencyRation += .1f * Time.deltaTime;
-                paintedWallRatio = Mathf.RoundToInt(wall.material.color.a * 100);
-
-                wallScaleSize.transform.parent.localScale = new Vector3(1, Mathf.Lerp(0, 1f, transparencyRation), 1);
-                Debug.Log("You've just painted %" + paintedWallRatio + " of the wall!");
-
-                paintedWallRatioText.text = "%" + paintedWallRatio;
-                if (paintedWallRatio == 100)
-                {
-                    gameManager.RestartGame();
-                }
-            }
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            swerveFirstPosition = Vector3.zero;
-            swerveLastPosition = Vector3.zero;
-        }
-    }
-    void PaintTheWallMobil()
-    {
-        // painting for mobile devices
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            if (touch.phase == TouchPhase.Began)
-            {
-                swerveFirstPosition.x = touch.position.x;
-            }
-            if (touch.phase == TouchPhase.Moved)
-            {
-                if (swerveLastPosition != swerveFirstPosition)
-                {
-                    wall.material.color = new Color(1, 0, 0, Mathf.Lerp(0f, 1f, transparencyRation));
-                    transparencyRation += 0.0005f;
-                    paintedWallRatio = Mathf.RoundToInt(wall.material.color.a * 100);
-
-                    wallScaleSize.transform.parent.localScale = new Vector3(1, Mathf.Lerp(0, 1, transparencyRation), 1);
-                    paintedWallRatioText.text = "%" + paintedWallRatio;
-                    if (paintedWallRatio == 100)
-                    {
-                        gameManager.RestartGame();
-                    }
-                }
-            }
-            if (touch.phase == TouchPhase.Ended)
             {
                 swerveLastPosition = Vector3.zero;
                 swerveLastPosition = Vector3.zero;
@@ -314,6 +250,7 @@ public class PlayerMovement : MonoBehaviour
             playerRankText.text = Ranks.RANK.ToString() + ": " + count + "\n" + Ranks.AWSOME.ToString();
         }
     }
+
     enum Ranks
     {
         RANK, AWSOME, LOOSING, FASTER, DUDE

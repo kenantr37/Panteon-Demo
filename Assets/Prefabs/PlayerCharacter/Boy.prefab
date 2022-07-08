@@ -213,12 +213,12 @@ MonoBehaviour:
   swerveLastPosition: {x: 0, y: 0, z: 0}
   distanceFirstLastPosition: {x: 0, y: 0, z: 0}
   wall: {fileID: 0}
-  wallScaleSize: {fileID: 0}
   paintedWallRatio: 0
   paintedWallRatioText: {fileID: 0}
   _finishLineArrived: 0
   _playerFirstRank: 0
   playerRankText: {fileID: 0}
+  paintTime: 0
 --- !u!114 &6474844232684378964
 MonoBehaviour:
   m_ObjectHideFlags: 0

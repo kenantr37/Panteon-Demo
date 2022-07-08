@@ -31,6 +31,8 @@ public class PlayerCollisionHandler : MonoBehaviour
         }
         if (collision.gameObject.tag == "Finish")
         {
+            playerMovement.paintTime = true;
+
             playerMovement.PlayerStopRunning = true;
             wall.gameObject.SetActive(true);
             Vector3 center = new Vector3(0, transform.position.y, transform.position.z);

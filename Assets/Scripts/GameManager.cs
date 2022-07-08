@@ -28,21 +28,17 @@ public class GameManager : MonoBehaviour
     }
     public void RestartGame()
     {
-        StartCoroutine(ShowRestartButton());
+        StartCoroutine(IsGameOverTimer());
     }
     public void LoadGameAgain()
     {
         restartButton.gameObject.SetActive(false);
         SceneManager.LoadScene(0);
     }
-    IEnumerator ShowRestartButton()
+    IEnumerator IsGameOverTimer()
     {
         yield return new WaitForSeconds(3);
         restartButton.gameObject.SetActive(true);
-    }
-    IEnumerator GameOverTimer()
-    {
-        yield return new WaitForSeconds(2);
         isGameOver = true;
     }
 }
