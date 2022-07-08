@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   percentageCounter: {fileID: 0}
-  initialCountNumber: 0
+  _initialCountNumber: 0

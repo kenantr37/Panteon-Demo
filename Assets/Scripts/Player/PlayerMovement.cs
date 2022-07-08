@@ -73,11 +73,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (gameManager.isGameStarted)
         {
-
             if (FinishLineArrived)
             {
-                //PaintTheWallMouse();
-                //PaintTheWallMobil();
+
             }
             else
             {

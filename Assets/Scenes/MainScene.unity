@@ -6370,33 +6370,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllWallParts
       objectReference: {fileID: 0}
-    - target: {fileID: 1073769011078300756, guid: ce931192741dff449bd978351729bb64, type: 3}
-      propertyPath: wall
-      value: 
-      objectReference: {fileID: 1062846267}
-    - target: {fileID: 1073769011078300756, guid: ce931192741dff449bd978351729bb64, type: 3}
-      propertyPath: brushSize
-      value: 0.165
-      objectReference: {fileID: 0}
-    - target: {fileID: 1073769011078300756, guid: ce931192741dff449bd978351729bb64, type: 3}
-      propertyPath: wallCurrentPosition
-      value: 
-      objectReference: {fileID: 1970176108}
-    - target: {fileID: 1073769011078300756, guid: ce931192741dff449bd978351729bb64, type: 3}
-      propertyPath: brushDistanceBetweenWall.z
-      value: -0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1073769011078300757, guid: ce931192741dff449bd978351729bb64, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1073769011078300778, guid: ce931192741dff449bd978351729bb64, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
     - target: {fileID: 6401401427780355801, guid: ce931192741dff449bd978351729bb64, type: 3}
       propertyPath: m_RootOrder
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6401401427780355801, guid: ce931192741dff449bd978351729bb64, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6401401427780355801, guid: ce931192741dff449bd978351729bb64, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8636,6 +8616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameStarted: 0
   isGameRestarted: 0
+  isGameOver: 0
   startButton: {fileID: 2101733823}
   restartButton: {fileID: 578120120}
   quitButton: {fileID: 1223918459}
@@ -10410,21 +10391,13 @@ PrefabInstance:
       value: Boy
       objectReference: {fileID: 0}
     - target: {fileID: 5143574615526852078, guid: 4b3dd3d5f95bdcd458392eb627906240, type: 3}
-      propertyPath: wall
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5143574615526852078, guid: 4b3dd3d5f95bdcd458392eb627906240, type: 3}
       propertyPath: wallScaleSize
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1062846267}
     - target: {fileID: 5143574615526852078, guid: 4b3dd3d5f95bdcd458392eb627906240, type: 3}
       propertyPath: playerRankText
       value: 
       objectReference: {fileID: 763692193}
-    - target: {fileID: 5143574615526852078, guid: 4b3dd3d5f95bdcd458392eb627906240, type: 3}
-      propertyPath: _mobilScreenSpeed
-      value: 0.001
-      objectReference: {fileID: 0}
     - target: {fileID: 5143574615526852078, guid: 4b3dd3d5f95bdcd458392eb627906240, type: 3}
       propertyPath: paintedWallRatioText
       value: 
@@ -11164,7 +11137,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
+  m_text: '%:0
 
 '
   m_isRightToLeft: 0
@@ -11247,11 +11220,6 @@ CanvasRenderer:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3362926467334972768, guid: 78ca0e0685094d141b9c24e938420d83, type: 3}
   m_PrefabInstance: {fileID: 1437699463}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1970176108 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1073769011078300778, guid: ce931192741dff449bd978351729bb64, type: 3}
-  m_PrefabInstance: {fileID: 1062846266}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1972083433
 GameObject:

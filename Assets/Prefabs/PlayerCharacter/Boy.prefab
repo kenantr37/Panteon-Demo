@@ -208,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerMoveForwardSpeed: 1.3
   _mouseSpeed: 1
-  _mobilScreenSpeed: 0.005
+  _mobilScreenSpeed: 0.001
   swerveFirstPosition: {x: 0, y: 0, z: 0}
   swerveLastPosition: {x: 0, y: 0, z: 0}
   distanceFirstLastPosition: {x: 0, y: 0, z: 0}

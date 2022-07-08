@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6401401427780355801
 Transform:
   m_ObjectHideFlags: 0
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 1073769011078300757}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -308,9 +308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brush: {fileID: 3048091996646643283, guid: 080a2f023bf214f438bb7cc0e50366a4, type: 3}
-  brushDistanceBetweenWall: {x: 0, y: 0, z: 0}
+  brushDistanceBetweenWall: {x: 0, y: 0, z: -0.1}
   brushSize: 0.165
-  canPaint: 0
 --- !u!64 &1073769011078300757
 MeshCollider:
   m_ObjectHideFlags: 0

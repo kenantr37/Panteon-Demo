@@ -14,7 +14,6 @@ public class BrushBorder : MonoBehaviour
     {
         brush = FindObjectOfType<Brush>();
         playerMovement = FindObjectOfType<PlayerMovement>();
-
     }
     void LateUpdate()
     {
@@ -24,21 +23,6 @@ public class BrushBorder : MonoBehaviour
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xBorderForWall, xBorderForWall),
             Mathf.Clamp(transform.position.y, -yBorderForWall, yBorderForWall),
             transform.parent.position.z - .1f);
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Ground")
-        {
-            brush.canPaint = true;
-        }
-    }
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Ground")
-        {
-            brush.canPaint = false;
         }
     }
 }

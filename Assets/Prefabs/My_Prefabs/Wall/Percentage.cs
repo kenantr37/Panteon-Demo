@@ -21,13 +21,13 @@ public class Percentage : MonoBehaviour
         {
             artýrýldý = true;
 
-            if (scoreManager.initialCountNumber < 80)
+            if (scoreManager.InitialCountNumber < 80)
             {
-                scoreManager.initialCountNumber += 1;
+                scoreManager.InitialCountNumber += 1;
             }
             else
             {
-                scoreManager.initialCountNumber += .5f;
+                scoreManager.InitialCountNumber += .5f;
 
             }
             StartCoroutine(IncreasePercentage());
@@ -37,7 +37,7 @@ public class Percentage : MonoBehaviour
     IEnumerator IncreasePercentage()
     {
         yield return new WaitForSeconds(.4f);
-        scoreManager.percentageCounter.text = "%" + Mathf.RoundToInt(scoreManager.initialCountNumber);
+        scoreManager.percentageCounter.text = "%" + Mathf.RoundToInt(scoreManager.InitialCountNumber);
     }
     IEnumerator DestroyPercentage()
     {

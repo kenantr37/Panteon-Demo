@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public bool isGameStarted;
     public bool isGameRestarted;
+    public bool isGameOver;
     [SerializeField] Button startButton;
     [SerializeField] Button restartButton;
     [SerializeField] Button quitButton;
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        isGameStarted = false;
         rankText.gameObject.SetActive(true);
         isGameStarted = !isGameStarted;
         startButton.gameObject.SetActive(false);
@@ -37,5 +39,10 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         restartButton.gameObject.SetActive(true);
+    }
+    IEnumerator GameOverTimer()
+    {
+        yield return new WaitForSeconds(2);
+        isGameOver = true;
     }
 }
