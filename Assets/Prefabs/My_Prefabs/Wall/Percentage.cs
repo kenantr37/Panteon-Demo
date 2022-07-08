@@ -16,7 +16,7 @@ public class Percentage : MonoBehaviour
     }
     void Update()
     {
-        BrushDeleter();
+        //BrushDeleter();
 
         if (scoreManager.initialCountNumber == 100)
         {
