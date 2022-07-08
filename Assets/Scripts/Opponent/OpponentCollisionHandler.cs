@@ -10,7 +10,6 @@ public class OpponentCollisionHandler : MonoBehaviour
     Rigidbody opponentRb;
     [SerializeField] Transform navigator;
     NavMeshAgent _opponentNavMesh;
-
     void Start()
     {
         opponent = GetComponent<Opponent>();
@@ -55,11 +54,11 @@ public class OpponentCollisionHandler : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("RotatingPlatformRight") || collision.gameObject.CompareTag("RotatingPlatformLeft"))
         {
-            if (transform.position.x <= -.175)
+            if (transform.position.x <= -.170)
             {
                 opponentRb.velocity = Vector3.right * 115.5f * Time.fixedDeltaTime;
             }
-            if (transform.position.x > -.225)
+            if (transform.position.x > -.220)
             {
                 opponentRb.velocity = Vector3.left * 15.5f * Time.fixedDeltaTime;
             }

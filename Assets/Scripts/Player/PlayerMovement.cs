@@ -49,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
     public bool PlayerDeadChecker { get { return _playerDeadChecker; } set { _playerDeadChecker = value; } }
     public Rigidbody PlayerRb { get { return _playerRb; } set { _playerRb = value; } }
     public bool PlayerStopRunning { get { return _playerStopRunning; } set { _playerStopRunning = value; } }
-
     void Awake()
     {
         opponents = FindObjectsOfType<Opponent>();
@@ -250,7 +249,6 @@ public class PlayerMovement : MonoBehaviour
             playerRankText.text = Ranks.RANK.ToString() + ": " + count + "\n" + Ranks.AWSOME.ToString();
         }
     }
-
     enum Ranks
     {
         RANK, AWSOME, LOOSING, FASTER, DUDE

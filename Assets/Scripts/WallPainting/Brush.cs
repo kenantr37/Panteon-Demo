@@ -16,7 +16,6 @@ public class Brush : MonoBehaviour
     GameManager gameManager;
 
     Vector3 lastTouch, firstTouch;
-
     void Awake()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();

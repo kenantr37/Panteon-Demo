@@ -95,12 +95,12 @@ public class Opponent : MonoBehaviour
                 if (calculateHypotenuse <= 1f && everyObject.position.x < transform.position.x)
                 {
                     Debug.DrawLine(transform.position, everyObject.position, Color.red);
-                    transform.Translate(Vector3.right * Time.deltaTime * 1.05f);
+                    transform.Translate(Vector3.right * Time.deltaTime * 1.1f);
                 }
                 else if (calculateHypotenuse <= 1f && everyObject.position.x > transform.position.x)
                 {
                     Debug.DrawLine(transform.position, everyObject.position, Color.red);
-                    transform.Translate(Vector3.left * Time.deltaTime * 1.05f);
+                    transform.Translate(Vector3.left * Time.deltaTime * 1.1f);
                 }
             }
         }

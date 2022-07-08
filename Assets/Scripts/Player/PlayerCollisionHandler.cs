@@ -9,7 +9,6 @@ public class PlayerCollisionHandler : MonoBehaviour
     PlayerMovement playerMovement;
 
     public bool changeCameraPosition;
-
     void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
